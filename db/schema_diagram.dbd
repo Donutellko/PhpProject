@@ -5,14 +5,12 @@
   <SchemaVersion>1.2</SchemaVersion>
   <DatabaseProvider>59f90733-4d68-4fdf-82a7-f0fcbf5460aa</DatabaseProvider>
   <Connection>
-    <Name>localhost_exchange</Name>
+    <Name>xampp_exchange</Name>
     <Category>00000000-0000-0000-0000-000000000000</Category>
-    <ConnectionString>User Id=root;Host=localhost;Database=exchange;Character Set=utf8</ConnectionString>
+    <ConnectionString>User Id=root;Host=localhost;Character Set=utf8</ConnectionString>
   </Connection>
   <Settings>
     <DbDiagramOptions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-      <SkinType>IDEF1XPure</SkinType>
-      <PreserveRouting>false</PreserveRouting>
       <CustomProperties />
     </DbDiagramOptions>
     <Options xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PageOptions">
@@ -28,7 +26,6 @@
         <Width>827 in/100</Width>
         <Height>1169 in/100</Height>
       </PaperSize>
-      <PaperSourceName>Automatically Select</PaperSourceName>
     </Options>
     <Options xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="PrintOptions" />
     <Options xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ViewOptions">
@@ -55,11 +52,11 @@
               <Parent>0</Parent>
             </CustomProperties>
             <Location>
-              <X>360 px</X>
-              <Y>240 px</Y>
+              <X>1132 px</X>
+              <Y>373 px</Y>
             </Location>
             <Size>
-              <Width>131 px</Width>
+              <Width>143 px</Width>
               <Height>110 px</Height>
             </Size>
             <DbOid>
@@ -78,15 +75,15 @@
               <Parent>0</Parent>
             </CustomProperties>
             <Location>
-              <X>880 px</X>
-              <Y>360 px</Y>
+              <X>851 px</X>
+              <Y>40 px</Y>
             </Location>
             <Size>
-              <Width>196 px</Width>
-              <Height>280 px</Height>
+              <Width>240 px</Width>
+              <Height>229 px</Height>
             </Size>
             <DbOid>
-              <Path>exchange.bargain</Path>
+              <Path>exchange.bank_transaction</Path>
               <TypeName>Table</TypeName>
             </DbOid>
             <Compartments>
@@ -101,38 +98,15 @@
               <Parent>0</Parent>
             </CustomProperties>
             <Location>
-              <X>493 px</X>
-              <Y>40 px</Y>
+              <X>849 px</X>
+              <Y>585 px</Y>
             </Location>
             <Size>
-              <Width>190 px</Width>
-              <Height>161 px</Height>
+              <Width>244 px</Width>
+              <Height>280 px</Height>
             </Size>
             <DbOid>
-              <Path>exchange.bargain_bet</Path>
-              <TypeName>Table</TypeName>
-            </DbOid>
-            <Compartments>
-              <ConstraintsCollapsed>True</ConstraintsCollapsed>
-              <IndexesCollapsed>True</IndexesCollapsed>
-              <TriggersCollapsed>True</TriggersCollapsed>
-            </Compartments>
-          </Model>
-          <Model xsi:type="TableModel">
-            <CustomProperties>
-              <OID>4</OID>
-              <Parent>0</Parent>
-            </CustomProperties>
-            <Location>
-              <X>100 px</X>
-              <Y>404 px</Y>
-            </Location>
-            <Size>
-              <Width>191 px</Width>
-              <Height>263 px</Height>
-            </Size>
-            <DbOid>
-              <Path>exchange.bargain_transaction</Path>
+              <Path>exchange.bargain</Path>
               <TypeName>Table</TypeName>
             </DbOid>
             <Compartments>
@@ -143,63 +117,69 @@
           </Model>
           <Model xsi:type="RelationLinkModel">
             <CustomProperties>
-              <OID>5</OID>
-              <Comment>6</Comment>
-              <OutModel>4</OutModel>
-              <InModel>7</InModel>
-              <OutPort>8</OutPort>
-              <InPort>9</InPort>
+              <OID>4</OID>
+              <Comment>5</Comment>
+              <OutModel>3</OutModel>
+              <InModel>1</InModel>
+              <OutPort>6</OutPort>
+              <InPort>7</InPort>
               <Parent>0</Parent>
             </CustomProperties>
             <PortAnchors>
               <Port>
                 <Location>
-                  <X>0 px</X>
-                  <Y>149.5 px</Y>
+                  <X>244.25 px</X>
+                  <Y>139.75 px</Y>
                 </Location>
                 <Anchors>Top Bottom</Anchors>
                 <Align>Right</Align>
                 <CustomProperties>
-                  <OID>8</OID>
+                  <OID>6</OID>
                   <PortType>FloatAnchor</PortType>
                 </CustomProperties>
               </Port>
               <Port>
                 <Location>
-                  <X>0 px</X>
-                  <Y>133.5 px</Y>
+                  <X>71.25 px</X>
+                  <Y>109.75 px</Y>
                 </Location>
-                <Anchors>Top Bottom</Anchors>
-                <Align>Left</Align>
+                <Anchors>Left Right</Anchors>
+                <Align>Bottom</Align>
                 <CustomProperties>
-                  <OID>9</OID>
+                  <OID>7</OID>
                   <PortType>FloatAnchor</PortType>
                 </CustomProperties>
               </Port>
             </PortAnchors>
+            <BendPoints>
+              <PointD>
+                <X>1203.25 px</X>
+                <Y>724.75 px</Y>
+              </PointD>
+            </BendPoints>
             <IsManuallyRouted>false</IsManuallyRouted>
             <DbOid>
-              <Path>exchange.bargain_transaction.bargain_transaction_ibfk_3</Path>
+              <Path>exchange.bargain.bargain_ibfk_2</Path>
               <TypeName>ForeignKey</TypeName>
             </DbOid>
           </Model>
           <Model xsi:type="RelationCommentModel">
             <CustomProperties>
-              <OID>6</OID>
-              <HolderModel>5</HolderModel>
-              <Port>10</Port>
+              <OID>5</OID>
+              <HolderModel>4</HolderModel>
+              <Port>8</Port>
               <Parent>0</Parent>
             </CustomProperties>
             <PortAnchors>
               <Port xsi:type="LinkPort">
                 <Location>
-                  <X>-134.5 px</X>
-                  <Y>0 px</Y>
+                  <X>-110.25 px</X>
+                  <Y>120.875 px</Y>
                 </Location>
                 <Anchors>None</Anchors>
                 <Align>Right</Align>
                 <CustomProperties>
-                  <OID>10</OID>
+                  <OID>8</OID>
                   <PortType>FixedAnchor</PortType>
                 </CustomProperties>
                 <LinkPortAnchor>OutPoint</LinkPortAnchor>
@@ -212,16 +192,206 @@
           </Model>
           <Model xsi:type="TableModel">
             <CustomProperties>
-              <OID>11</OID>
+              <OID>9</OID>
               <Parent>0</Parent>
             </CustomProperties>
             <Location>
-              <X>910 px</X>
-              <Y>20 px</Y>
+              <X>620 px</X>
+              <Y>329 px</Y>
             </Location>
             <Size>
-              <Width>133 px</Width>
-              <Height>107 px</Height>
+              <Width>190 px</Width>
+              <Height>195 px</Height>
+            </Size>
+            <DbOid>
+              <Path>exchange.bargain_bet</Path>
+              <TypeName>Table</TypeName>
+            </DbOid>
+            <Compartments>
+              <ConstraintsCollapsed>True</ConstraintsCollapsed>
+              <IndexesCollapsed>True</IndexesCollapsed>
+              <TriggersCollapsed>True</TriggersCollapsed>
+            </Compartments>
+          </Model>
+          <Model xsi:type="RelationLinkModel">
+            <CustomProperties>
+              <OID>10</OID>
+              <Comment>11</Comment>
+              <OutModel>9</OutModel>
+              <InModel>3</InModel>
+              <OutPort>12</OutPort>
+              <InPort>13</InPort>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <PortAnchors>
+              <Port>
+                <Location>
+                  <X>93.75 px</X>
+                  <Y>195 px</Y>
+                </Location>
+                <Anchors>Left Right</Anchors>
+                <Align>Bottom</Align>
+                <CustomProperties>
+                  <OID>12</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
+              <Port>
+                <Location>
+                  <X>-0.5 px</X>
+                  <Y>139.75 px</Y>
+                </Location>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Left</Align>
+                <CustomProperties>
+                  <OID>13</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
+            </PortAnchors>
+            <BendPoints>
+              <PointD>
+                <X>713.75 px</X>
+                <Y>724.75 px</Y>
+              </PointD>
+            </BendPoints>
+            <IsManuallyRouted>false</IsManuallyRouted>
+            <DbOid>
+              <Path>exchange.bargain_bet.bargain_bet_ibfk_2</Path>
+              <TypeName>ForeignKey</TypeName>
+            </DbOid>
+          </Model>
+          <Model xsi:type="RelationCommentModel">
+            <CustomProperties>
+              <OID>11</OID>
+              <HolderModel>10</HolderModel>
+              <Port>14</Port>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <PortAnchors>
+              <Port xsi:type="LinkPort">
+                <Location>
+                  <X>0 px</X>
+                  <Y>-100.375 px</Y>
+                </Location>
+                <Anchors>None</Anchors>
+                <Align>Bottom</Align>
+                <CustomProperties>
+                  <OID>14</OID>
+                  <PortType>FixedAnchor</PortType>
+                </CustomProperties>
+                <LinkPortAnchor>OutPoint</LinkPortAnchor>
+              </Port>
+            </PortAnchors>
+            <CommentOffset>
+              <X>22 px</X>
+              <Y>2 px</Y>
+            </CommentOffset>
+          </Model>
+          <Model xsi:type="TableModel">
+            <CustomProperties>
+              <OID>15</OID>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <Location>
+              <X>353 px</X>
+              <Y>320 px</Y>
+            </Location>
+            <Size>
+              <Width>207 px</Width>
+              <Height>212 px</Height>
+            </Size>
+            <DbOid>
+              <Path>exchange.bargain_completed</Path>
+              <TypeName>Table</TypeName>
+            </DbOid>
+            <Compartments>
+              <ConstraintsCollapsed>True</ConstraintsCollapsed>
+              <IndexesCollapsed>True</IndexesCollapsed>
+              <TriggersCollapsed>True</TriggersCollapsed>
+            </Compartments>
+          </Model>
+          <Model xsi:type="RelationLinkModel">
+            <CustomProperties>
+              <OID>16</OID>
+              <Comment>17</Comment>
+              <OutModel>15</OutModel>
+              <InModel>9</InModel>
+              <OutPort>18</OutPort>
+              <InPort>19</InPort>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <PortAnchors>
+              <Port>
+                <Location>
+                  <X>206.75 px</X>
+                  <Y>107.75 px</Y>
+                </Location>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Right</Align>
+                <CustomProperties>
+                  <OID>18</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
+              <Port>
+                <Location>
+                  <X>0.25 px</X>
+                  <Y>98.75 px</Y>
+                </Location>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Left</Align>
+                <CustomProperties>
+                  <OID>19</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
+            </PortAnchors>
+            <IsManuallyRouted>false</IsManuallyRouted>
+            <DbOid>
+              <Path>exchange.bargain_completed.bargain_completed_ibfk_1</Path>
+              <TypeName>ForeignKey</TypeName>
+            </DbOid>
+          </Model>
+          <Model xsi:type="RelationCommentModel">
+            <CustomProperties>
+              <OID>17</OID>
+              <HolderModel>16</HolderModel>
+              <Port>20</Port>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <PortAnchors>
+              <Port xsi:type="LinkPort">
+                <Location>
+                  <X>-30 px</X>
+                  <Y>0 px</Y>
+                </Location>
+                <Anchors>None</Anchors>
+                <Align>Right</Align>
+                <CustomProperties>
+                  <OID>20</OID>
+                  <PortType>FixedAnchor</PortType>
+                </CustomProperties>
+                <LinkPortAnchor>OutPoint</LinkPortAnchor>
+              </Port>
+            </PortAnchors>
+            <CommentOffset>
+              <X>22 px</X>
+              <Y>2 px</Y>
+            </CommentOffset>
+          </Model>
+          <Model xsi:type="TableModel">
+            <CustomProperties>
+              <OID>21</OID>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <Location>
+              <X>901 px</X>
+              <Y>1129 px</Y>
+            </Location>
+            <Size>
+              <Width>143 px</Width>
+              <Height>110 px</Height>
             </Size>
             <DbOid>
               <Path>exchange.category</Path>
@@ -235,12 +405,12 @@
           </Model>
           <Model xsi:type="TableModel">
             <CustomProperties>
-              <OID>7</OID>
+              <OID>22</OID>
               <Parent>0</Parent>
             </CustomProperties>
             <Location>
-              <X>560 px</X>
-              <Y>420 px</Y>
+              <X>870 px</X>
+              <Y>337 px</Y>
             </Location>
             <Size>
               <Width>204 px</Width>
@@ -258,46 +428,40 @@
           </Model>
           <Model xsi:type="RelationLinkModel">
             <CustomProperties>
-              <OID>12</OID>
-              <Comment>13</Comment>
+              <OID>23</OID>
+              <Comment>24</Comment>
               <OutModel>1</OutModel>
-              <InModel>7</InModel>
-              <OutPort>14</OutPort>
-              <InPort>15</InPort>
+              <InModel>22</InModel>
+              <OutPort>25</OutPort>
+              <InPort>26</InPort>
               <Parent>0</Parent>
             </CustomProperties>
             <PortAnchors>
               <Port>
                 <Location>
-                  <X>65.5 px</X>
-                  <Y>0 px</Y>
+                  <X>-0.25 px</X>
+                  <Y>54.75 px</Y>
                 </Location>
-                <Anchors>Left Right</Anchors>
-                <Align>Bottom</Align>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Left</Align>
                 <CustomProperties>
-                  <OID>14</OID>
+                  <OID>25</OID>
                   <PortType>FloatAnchor</PortType>
                 </CustomProperties>
               </Port>
               <Port>
                 <Location>
-                  <X>0 px</X>
-                  <Y>44.5 px</Y>
+                  <X>204 px</X>
+                  <Y>90.75 px</Y>
                 </Location>
                 <Anchors>Top Bottom</Anchors>
-                <Align>Left</Align>
+                <Align>Right</Align>
                 <CustomProperties>
-                  <OID>15</OID>
+                  <OID>26</OID>
                   <PortType>FloatAnchor</PortType>
                 </CustomProperties>
               </Port>
             </PortAnchors>
-            <BendPoints>
-              <PointD>
-                <X>425.5 px</X>
-                <Y>464.5 px</Y>
-              </PointD>
-            </BendPoints>
             <IsManuallyRouted>false</IsManuallyRouted>
             <DbOid>
               <Path>exchange.assistant.assistant_ibfk_1</Path>
@@ -306,63 +470,132 @@
           </Model>
           <Model xsi:type="RelationCommentModel">
             <CustomProperties>
-              <OID>13</OID>
-              <HolderModel>12</HolderModel>
-              <Port>16</Port>
+              <OID>24</OID>
+              <HolderModel>23</HolderModel>
+              <Port>27</Port>
               <Parent>0</Parent>
             </CustomProperties>
             <PortAnchors>
               <Port xsi:type="LinkPort">
                 <Location>
-                  <X>-67.25 px</X>
-                  <Y>-114.5 px</Y>
+                  <X>29 px</X>
+                  <Y>0 px</Y>
                 </Location>
                 <Anchors>None</Anchors>
-                <Align>Bottom</Align>
+                <Align>Left</Align>
                 <CustomProperties>
-                  <OID>16</OID>
+                  <OID>27</OID>
                   <PortType>FixedAnchor</PortType>
                 </CustomProperties>
                 <LinkPortAnchor>OutPoint</LinkPortAnchor>
               </Port>
             </PortAnchors>
             <CommentOffset>
-              <X>13 px</X>
-              <Y>34.5 px</Y>
+              <X>22 px</X>
+              <Y>2 px</Y>
             </CommentOffset>
           </Model>
           <Model xsi:type="RelationLinkModel">
             <CustomProperties>
-              <OID>17</OID>
-              <Comment>18</Comment>
+              <OID>28</OID>
+              <Comment>29</Comment>
               <OutModel>2</OutModel>
-              <InModel>7</InModel>
-              <OutPort>19</OutPort>
-              <InPort>20</InPort>
+              <InModel>22</InModel>
+              <OutPort>30</OutPort>
+              <InPort>31</InPort>
               <Parent>0</Parent>
             </CustomProperties>
             <PortAnchors>
               <Port>
                 <Location>
-                  <X>0 px</X>
-                  <Y>149 px</Y>
+                  <X>121.25 px</X>
+                  <Y>228.25 px</Y>
                 </Location>
-                <Anchors>Top Bottom</Anchors>
-                <Align>Left</Align>
+                <Anchors>Left Right</Anchors>
+                <Align>Bottom</Align>
                 <CustomProperties>
-                  <OID>19</OID>
+                  <OID>30</OID>
                   <PortType>FloatAnchor</PortType>
                 </CustomProperties>
               </Port>
               <Port>
                 <Location>
-                  <X>0 px</X>
-                  <Y>89 px</Y>
+                  <X>102.25 px</X>
+                  <Y>0 px</Y>
                 </Location>
-                <Anchors>Top Bottom</Anchors>
-                <Align>Right</Align>
+                <Anchors>Left Right</Anchors>
+                <Align>Top</Align>
                 <CustomProperties>
-                  <OID>20</OID>
+                  <OID>31</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
+            </PortAnchors>
+            <IsManuallyRouted>false</IsManuallyRouted>
+            <DbOid>
+              <Path>exchange.bank_transaction.bank_transaction_ibfk_1</Path>
+              <TypeName>ForeignKey</TypeName>
+            </DbOid>
+          </Model>
+          <Model xsi:type="RelationCommentModel">
+            <CustomProperties>
+              <OID>29</OID>
+              <HolderModel>28</HolderModel>
+              <Port>32</Port>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <PortAnchors>
+              <Port xsi:type="LinkPort">
+                <Location>
+                  <X>0 px</X>
+                  <Y>-34 px</Y>
+                </Location>
+                <Anchors>None</Anchors>
+                <Align>Bottom</Align>
+                <CustomProperties>
+                  <OID>32</OID>
+                  <PortType>FixedAnchor</PortType>
+                </CustomProperties>
+                <LinkPortAnchor>OutPoint</LinkPortAnchor>
+              </Port>
+            </PortAnchors>
+            <CommentOffset>
+              <X>22 px</X>
+              <Y>2 px</Y>
+            </CommentOffset>
+          </Model>
+          <Model xsi:type="RelationLinkModel">
+            <CustomProperties>
+              <OID>33</OID>
+              <Comment>34</Comment>
+              <OutModel>3</OutModel>
+              <InModel>22</InModel>
+              <OutPort>35</OutPort>
+              <InPort>36</InPort>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <PortAnchors>
+              <Port>
+                <Location>
+                  <X>123.25 px</X>
+                  <Y>-0.5 px</Y>
+                </Location>
+                <Anchors>Left Right</Anchors>
+                <Align>Top</Align>
+                <CustomProperties>
+                  <OID>35</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
+              <Port>
+                <Location>
+                  <X>102.25 px</X>
+                  <Y>178.75 px</Y>
+                </Location>
+                <Anchors>Left Right</Anchors>
+                <Align>Bottom</Align>
+                <CustomProperties>
+                  <OID>36</OID>
                   <PortType>FloatAnchor</PortType>
                 </CustomProperties>
               </Port>
@@ -375,21 +608,21 @@
           </Model>
           <Model xsi:type="RelationCommentModel">
             <CustomProperties>
-              <OID>18</OID>
-              <HolderModel>17</HolderModel>
-              <Port>21</Port>
+              <OID>34</OID>
+              <HolderModel>33</HolderModel>
+              <Port>37</Port>
               <Parent>0</Parent>
             </CustomProperties>
             <PortAnchors>
               <Port xsi:type="LinkPort">
                 <Location>
-                  <X>58 px</X>
-                  <Y>0 px</Y>
+                  <X>0 px</X>
+                  <Y>35 px</Y>
                 </Location>
                 <Anchors>None</Anchors>
-                <Align>Left</Align>
+                <Align>Top</Align>
                 <CustomProperties>
-                  <OID>21</OID>
+                  <OID>37</OID>
                   <PortType>FixedAnchor</PortType>
                 </CustomProperties>
                 <LinkPortAnchor>OutPoint</LinkPortAnchor>
@@ -399,249 +632,13 @@
               <X>22 px</X>
               <Y>2 px</Y>
             </CommentOffset>
-          </Model>
-          <Model xsi:type="RelationLinkModel">
-            <CustomProperties>
-              <OID>22</OID>
-              <Comment>23</Comment>
-              <OutModel>3</OutModel>
-              <InModel>7</InModel>
-              <OutPort>24</OutPort>
-              <InPort>25</InPort>
-              <Parent>0</Parent>
-            </CustomProperties>
-            <PortAnchors>
-              <Port>
-                <Location>
-                  <X>128.5 px</X>
-                  <Y>0 px</Y>
-                </Location>
-                <Anchors>Left Right</Anchors>
-                <Align>Bottom</Align>
-                <CustomProperties>
-                  <OID>24</OID>
-                  <PortType>FloatAnchor</PortType>
-                </CustomProperties>
-              </Port>
-              <Port>
-                <Location>
-                  <X>61.5 px</X>
-                  <Y>0 px</Y>
-                </Location>
-                <Anchors>Left Right</Anchors>
-                <Align>Top</Align>
-                <CustomProperties>
-                  <OID>25</OID>
-                  <PortType>FloatAnchor</PortType>
-                </CustomProperties>
-              </Port>
-            </PortAnchors>
-            <IsManuallyRouted>false</IsManuallyRouted>
-            <DbOid>
-              <Path>exchange.bargain_bet.bargain_bet_ibfk_1</Path>
-              <TypeName>ForeignKey</TypeName>
-            </DbOid>
-          </Model>
-          <Model xsi:type="RelationCommentModel">
-            <CustomProperties>
-              <OID>23</OID>
-              <HolderModel>22</HolderModel>
-              <Port>26</Port>
-              <Parent>0</Parent>
-            </CustomProperties>
-            <PortAnchors>
-              <Port xsi:type="LinkPort">
-                <Location>
-                  <X>0 px</X>
-                  <Y>-109.5 px</Y>
-                </Location>
-                <Anchors>None</Anchors>
-                <Align>Bottom</Align>
-                <CustomProperties>
-                  <OID>26</OID>
-                  <PortType>FixedAnchor</PortType>
-                </CustomProperties>
-                <LinkPortAnchor>OutPoint</LinkPortAnchor>
-              </Port>
-            </PortAnchors>
-            <CommentOffset>
-              <X>22 px</X>
-              <Y>2 px</Y>
-            </CommentOffset>
-          </Model>
-          <Model xsi:type="RelationLinkModel">
-            <CustomProperties>
-              <OID>27</OID>
-              <Comment>28</Comment>
-              <OutModel>4</OutModel>
-              <InModel>3</InModel>
-              <OutPort>29</OutPort>
-              <InPort>30</InPort>
-              <Parent>0</Parent>
-            </CustomProperties>
-            <PortAnchors>
-              <Port>
-                <Location>
-                  <X>95.5 px</X>
-                  <Y>0 px</Y>
-                </Location>
-                <Anchors>Left Right</Anchors>
-                <Align>Top</Align>
-                <CustomProperties>
-                  <OID>29</OID>
-                  <PortType>FloatAnchor</PortType>
-                </CustomProperties>
-              </Port>
-              <Port>
-                <Location>
-                  <X>0 px</X>
-                  <Y>80.5 px</Y>
-                </Location>
-                <Anchors>Top Bottom</Anchors>
-                <Align>Left</Align>
-                <CustomProperties>
-                  <OID>30</OID>
-                  <PortType>FloatAnchor</PortType>
-                </CustomProperties>
-              </Port>
-            </PortAnchors>
-            <BendPoints>
-              <PointD>
-                <X>195.5 px</X>
-                <Y>120.5 px</Y>
-              </PointD>
-            </BendPoints>
-            <IsManuallyRouted>false</IsManuallyRouted>
-            <DbOid>
-              <Path>exchange.bargain_transaction.bargain_transaction_ibfk_1</Path>
-              <TypeName>ForeignKey</TypeName>
-            </DbOid>
-          </Model>
-          <Model xsi:type="RelationCommentModel">
-            <CustomProperties>
-              <OID>28</OID>
-              <HolderModel>27</HolderModel>
-              <Port>31</Port>
-              <Parent>0</Parent>
-            </CustomProperties>
-            <PortAnchors>
-              <Port xsi:type="LinkPort">
-                <Location>
-                  <X>-148.75 px</X>
-                  <Y>283.5 px</Y>
-                </Location>
-                <Anchors>None</Anchors>
-                <Align>Top</Align>
-                <CustomProperties>
-                  <OID>31</OID>
-                  <PortType>FixedAnchor</PortType>
-                </CustomProperties>
-                <LinkPortAnchor>OutPoint</LinkPortAnchor>
-              </Port>
-            </PortAnchors>
-            <CommentOffset>
-              <X>146.239585876465 px</X>
-              <Y>-185.5 px</Y>
-            </CommentOffset>
-          </Model>
-          <Model xsi:type="RelationLinkModel">
-            <CustomProperties>
-              <OID>32</OID>
-              <Comment>33</Comment>
-              <OutModel>4</OutModel>
-              <InModel>7</InModel>
-              <OutPort>34</OutPort>
-              <InPort>35</InPort>
-              <Parent>0</Parent>
-            </CustomProperties>
-            <PortAnchors>
-              <Port>
-                <Location>
-                  <X>0 px</X>
-                  <Y>105 px</Y>
-                </Location>
-                <Anchors>Top Bottom</Anchors>
-                <Align>Right</Align>
-                <CustomProperties>
-                  <OID>34</OID>
-                  <PortType>FloatAnchor</PortType>
-                </CustomProperties>
-              </Port>
-              <Port>
-                <Location>
-                  <X>0 px</X>
-                  <Y>89 px</Y>
-                </Location>
-                <Anchors>Top Bottom</Anchors>
-                <Align>Left</Align>
-                <CustomProperties>
-                  <OID>35</OID>
-                  <PortType>FloatAnchor</PortType>
-                </CustomProperties>
-              </Port>
-            </PortAnchors>
-            <IsManuallyRouted>false</IsManuallyRouted>
-            <DbOid>
-              <Path>exchange.bargain_transaction.bargain_transaction_ibfk_2</Path>
-              <TypeName>ForeignKey</TypeName>
-            </DbOid>
-          </Model>
-          <Model xsi:type="RelationCommentModel">
-            <CustomProperties>
-              <OID>33</OID>
-              <HolderModel>32</HolderModel>
-              <Port>36</Port>
-              <Parent>0</Parent>
-            </CustomProperties>
-            <PortAnchors>
-              <Port xsi:type="LinkPort">
-                <Location>
-                  <X>-134.5 px</X>
-                  <Y>0 px</Y>
-                </Location>
-                <Anchors>None</Anchors>
-                <Align>Right</Align>
-                <CustomProperties>
-                  <OID>36</OID>
-                  <PortType>FixedAnchor</PortType>
-                </CustomProperties>
-                <LinkPortAnchor>OutPoint</LinkPortAnchor>
-              </Port>
-            </PortAnchors>
-            <CommentOffset>
-              <X>22 px</X>
-              <Y>2 px</Y>
-            </CommentOffset>
-          </Model>
-          <Model xsi:type="TableModel">
-            <CustomProperties>
-              <OID>37</OID>
-              <Parent>0</Parent>
-            </CustomProperties>
-            <Location>
-              <X>900 px</X>
-              <Y>180 px</Y>
-            </Location>
-            <Size>
-              <Width>163 px</Width>
-              <Height>127 px</Height>
-            </Size>
-            <DbOid>
-              <Path>exchange.item</Path>
-              <TypeName>Table</TypeName>
-            </DbOid>
-            <Compartments>
-              <ConstraintsCollapsed>True</ConstraintsCollapsed>
-              <IndexesCollapsed>True</IndexesCollapsed>
-              <TriggersCollapsed>True</TriggersCollapsed>
-            </Compartments>
           </Model>
           <Model xsi:type="RelationLinkModel">
             <CustomProperties>
               <OID>38</OID>
               <Comment>39</Comment>
-              <OutModel>37</OutModel>
-              <InModel>11</InModel>
+              <OutModel>9</OutModel>
+              <InModel>22</InModel>
               <OutPort>40</OutPort>
               <InPort>41</InPort>
               <Parent>0</Parent>
@@ -649,11 +646,11 @@
             <PortAnchors>
               <Port>
                 <Location>
-                  <X>76.5 px</X>
-                  <Y>0 px</Y>
+                  <X>190 px</X>
+                  <Y>98.75 px</Y>
                 </Location>
-                <Anchors>Left Right</Anchors>
-                <Align>Top</Align>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Right</Align>
                 <CustomProperties>
                   <OID>40</OID>
                   <PortType>FloatAnchor</PortType>
@@ -661,11 +658,11 @@
               </Port>
               <Port>
                 <Location>
-                  <X>66.5 px</X>
-                  <Y>0 px</Y>
+                  <X>0.5 px</X>
+                  <Y>90.75 px</Y>
                 </Location>
-                <Anchors>Left Right</Anchors>
-                <Align>Bottom</Align>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Left</Align>
                 <CustomProperties>
                   <OID>41</OID>
                   <PortType>FloatAnchor</PortType>
@@ -674,7 +671,7 @@
             </PortAnchors>
             <IsManuallyRouted>false</IsManuallyRouted>
             <DbOid>
-              <Path>exchange.item.item_ibfk_1</Path>
+              <Path>exchange.bargain_bet.bargain_bet_ibfk_1</Path>
               <TypeName>ForeignKey</TypeName>
             </DbOid>
           </Model>
@@ -688,11 +685,11 @@
             <PortAnchors>
               <Port xsi:type="LinkPort">
                 <Location>
-                  <X>0 px</X>
-                  <Y>26.5 px</Y>
+                  <X>-30 px</X>
+                  <Y>0 px</Y>
                 </Location>
                 <Anchors>None</Anchors>
-                <Align>Top</Align>
+                <Align>Right</Align>
                 <CustomProperties>
                   <OID>42</OID>
                   <PortType>FixedAnchor</PortType>
@@ -705,33 +702,44 @@
               <Y>2 px</Y>
             </CommentOffset>
           </Model>
-          <Model xsi:type="RelationLinkModel">
+          <Model xsi:type="TableModel">
             <CustomProperties>
               <OID>43</OID>
-              <Comment>44</Comment>
-              <OutModel>2</OutModel>
-              <InModel>37</InModel>
-              <OutPort>45</OutPort>
-              <InPort>46</InPort>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <Location>
+              <X>882 px</X>
+              <Y>925 px</Y>
+            </Location>
+            <Size>
+              <Width>181 px</Width>
+              <Height>144 px</Height>
+            </Size>
+            <DbOid>
+              <Path>exchange.item</Path>
+              <TypeName>Table</TypeName>
+            </DbOid>
+            <Compartments>
+              <ConstraintsCollapsed>True</ConstraintsCollapsed>
+              <IndexesCollapsed>True</IndexesCollapsed>
+              <TriggersCollapsed>True</TriggersCollapsed>
+            </Compartments>
+          </Model>
+          <Model xsi:type="RelationLinkModel">
+            <CustomProperties>
+              <OID>44</OID>
+              <Comment>45</Comment>
+              <OutModel>43</OutModel>
+              <InModel>21</InModel>
+              <OutPort>46</OutPort>
+              <InPort>47</InPort>
               <Parent>0</Parent>
             </CustomProperties>
             <PortAnchors>
               <Port>
                 <Location>
-                  <X>101.5 px</X>
-                  <Y>0 px</Y>
-                </Location>
-                <Anchors>Left Right</Anchors>
-                <Align>Top</Align>
-                <CustomProperties>
-                  <OID>45</OID>
-                  <PortType>FloatAnchor</PortType>
-                </CustomProperties>
-              </Port>
-              <Port>
-                <Location>
-                  <X>81.5 px</X>
-                  <Y>0 px</Y>
+                  <X>90.25 px</X>
+                  <Y>143.5 px</Y>
                 </Location>
                 <Anchors>Left Right</Anchors>
                 <Align>Bottom</Align>
@@ -740,30 +748,42 @@
                   <PortType>FloatAnchor</PortType>
                 </CustomProperties>
               </Port>
+              <Port>
+                <Location>
+                  <X>71.25 px</X>
+                  <Y>0 px</Y>
+                </Location>
+                <Anchors>Left Right</Anchors>
+                <Align>Top</Align>
+                <CustomProperties>
+                  <OID>47</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
             </PortAnchors>
             <IsManuallyRouted>false</IsManuallyRouted>
             <DbOid>
-              <Path>exchange.bargain.bargain_ibfk_2</Path>
+              <Path>exchange.item.item_ibfk_1</Path>
               <TypeName>ForeignKey</TypeName>
             </DbOid>
           </Model>
           <Model xsi:type="RelationCommentModel">
             <CustomProperties>
-              <OID>44</OID>
-              <HolderModel>43</HolderModel>
-              <Port>47</Port>
+              <OID>45</OID>
+              <HolderModel>44</HolderModel>
+              <Port>48</Port>
               <Parent>0</Parent>
             </CustomProperties>
             <PortAnchors>
               <Port xsi:type="LinkPort">
                 <Location>
                   <X>0 px</X>
-                  <Y>26.5 px</Y>
+                  <Y>-30 px</Y>
                 </Location>
                 <Anchors>None</Anchors>
-                <Align>Top</Align>
+                <Align>Bottom</Align>
                 <CustomProperties>
-                  <OID>47</OID>
+                  <OID>48</OID>
                   <PortType>FixedAnchor</PortType>
                 </CustomProperties>
                 <LinkPortAnchor>OutPoint</LinkPortAnchor>
@@ -776,31 +796,19 @@
           </Model>
           <Model xsi:type="RelationLinkModel">
             <CustomProperties>
-              <OID>48</OID>
-              <Comment>49</Comment>
-              <OutModel>4</OutModel>
-              <InModel>1</InModel>
-              <OutPort>50</OutPort>
-              <InPort>51</InPort>
+              <OID>49</OID>
+              <Comment>50</Comment>
+              <OutModel>3</OutModel>
+              <InModel>43</InModel>
+              <OutPort>51</OutPort>
+              <InPort>52</InPort>
               <Parent>0</Parent>
             </CustomProperties>
             <PortAnchors>
               <Port>
                 <Location>
-                  <X>0 px</X>
-                  <Y>65.75 px</Y>
-                </Location>
-                <Anchors>Top Bottom</Anchors>
-                <Align>Right</Align>
-                <CustomProperties>
-                  <OID>50</OID>
-                  <PortType>FloatAnchor</PortType>
-                </CustomProperties>
-              </Port>
-              <Port>
-                <Location>
-                  <X>32.75 px</X>
-                  <Y>0 px</Y>
+                  <X>123.25 px</X>
+                  <Y>280 px</Y>
                 </Location>
                 <Anchors>Left Right</Anchors>
                 <Align>Bottom</Align>
@@ -809,36 +817,134 @@
                   <PortType>FloatAnchor</PortType>
                 </CustomProperties>
               </Port>
+              <Port>
+                <Location>
+                  <X>90.25 px</X>
+                  <Y>0.5 px</Y>
+                </Location>
+                <Anchors>Left Right</Anchors>
+                <Align>Top</Align>
+                <CustomProperties>
+                  <OID>52</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
             </PortAnchors>
-            <BendPoints>
-              <PointD>
-                <X>392.75 px</X>
-                <Y>469.75 px</Y>
-              </PointD>
-            </BendPoints>
             <IsManuallyRouted>false</IsManuallyRouted>
             <DbOid>
-              <Path>exchange.bargain_transaction.bargain_transaction_ibfk_4</Path>
+              <Path>exchange.bargain.bargain_ibfk_3</Path>
               <TypeName>ForeignKey</TypeName>
             </DbOid>
           </Model>
           <Model xsi:type="RelationCommentModel">
             <CustomProperties>
-              <OID>49</OID>
-              <HolderModel>48</HolderModel>
-              <Port>52</Port>
+              <OID>50</OID>
+              <HolderModel>49</HolderModel>
+              <Port>53</Port>
               <Parent>0</Parent>
             </CustomProperties>
             <PortAnchors>
               <Port xsi:type="LinkPort">
                 <Location>
-                  <X>-101.75 px</X>
-                  <Y>59.875 px</Y>
+                  <X>0 px</X>
+                  <Y>-30 px</Y>
+                </Location>
+                <Anchors>None</Anchors>
+                <Align>Bottom</Align>
+                <CustomProperties>
+                  <OID>53</OID>
+                  <PortType>FixedAnchor</PortType>
+                </CustomProperties>
+                <LinkPortAnchor>OutPoint</LinkPortAnchor>
+              </Port>
+            </PortAnchors>
+            <CommentOffset>
+              <X>22 px</X>
+              <Y>2 px</Y>
+            </CommentOffset>
+          </Model>
+          <Model xsi:type="TableModel">
+            <CustomProperties>
+              <OID>54</OID>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <Location>
+              <X>40 px</X>
+              <Y>279 px</Y>
+            </Location>
+            <Size>
+              <Width>254 px</Width>
+              <Height>297 px</Height>
+            </Size>
+            <DbOid>
+              <Path>exchange.receipt</Path>
+              <TypeName>Table</TypeName>
+            </DbOid>
+            <Compartments>
+              <ConstraintsCollapsed>True</ConstraintsCollapsed>
+              <IndexesCollapsed>True</IndexesCollapsed>
+              <TriggersCollapsed>True</TriggersCollapsed>
+            </Compartments>
+          </Model>
+          <Model xsi:type="RelationLinkModel">
+            <CustomProperties>
+              <OID>55</OID>
+              <Comment>56</Comment>
+              <OutModel>54</OutModel>
+              <InModel>15</InModel>
+              <OutPort>57</OutPort>
+              <InPort>58</InPort>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <PortAnchors>
+              <Port>
+                <Location>
+                  <X>253 px</X>
+                  <Y>148.75 px</Y>
+                </Location>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Right</Align>
+                <CustomProperties>
+                  <OID>57</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
+              <Port>
+                <Location>
+                  <X>0.5 px</X>
+                  <Y>107.75 px</Y>
+                </Location>
+                <Anchors>Top Bottom</Anchors>
+                <Align>Left</Align>
+                <CustomProperties>
+                  <OID>58</OID>
+                  <PortType>FloatAnchor</PortType>
+                </CustomProperties>
+              </Port>
+            </PortAnchors>
+            <IsManuallyRouted>false</IsManuallyRouted>
+            <DbOid>
+              <Path>exchange.receipt.receipt_ibfk_1</Path>
+              <TypeName>ForeignKey</TypeName>
+            </DbOid>
+          </Model>
+          <Model xsi:type="RelationCommentModel">
+            <CustomProperties>
+              <OID>56</OID>
+              <HolderModel>55</HolderModel>
+              <Port>59</Port>
+              <Parent>0</Parent>
+            </CustomProperties>
+            <PortAnchors>
+              <Port xsi:type="LinkPort">
+                <Location>
+                  <X>-29.5 px</X>
+                  <Y>0 px</Y>
                 </Location>
                 <Anchors>None</Anchors>
                 <Align>Right</Align>
                 <CustomProperties>
-                  <OID>52</OID>
+                  <OID>59</OID>
                   <PortType>FixedAnchor</PortType>
                 </CustomProperties>
                 <LinkPortAnchor>OutPoint</LinkPortAnchor>
@@ -852,10 +958,10 @@
         </Children>
         <ViewPort>
           <ScaleMode>Free</ScaleMode>
-          <Scale>0.77</Scale>
+          <Scale>0.349919319</Scale>
           <Location>
-            <X>-28.2003709413349 px</X>
-            <Y>-31.9109469871189 px</Y>
+            <X>-618.918190645229 px</X>
+            <Y>14.6972812216198 px</Y>
           </Location>
         </ViewPort>
       </Model>
