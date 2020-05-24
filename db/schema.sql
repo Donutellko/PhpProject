@@ -3,10 +3,10 @@
 /* =============================================== */
 
 drop database exchange;
- 
+
 CREATE DATABASE exchange
-	CHARACTER SET utf8
-	COLLATE utf8_general_ci;
+  CHARACTER SET utf8
+  COLLATE utf8_general_ci;
 
 USE exchange;
 /*
@@ -38,10 +38,11 @@ create table customer (
     blocked boolean default false,
     primary key (id)
 );
-insert into customer (id, fullname, email, balance, is_broker, password_hash, blocked)
-  values (1, 'Донат', 'shergalis.dv@edu.spbstu.ru', 150 * 100, FALSE, '12345', FALSE),
-  (2, 'Филипп', 'shergalis.fv@edu.spbstu.ru', 100000 * 100, FALSE, '12345', FALSE),
-  (3, 'Баффет', 'buffet.u@edu.spbstu.ru', 10000000 * 100, TRUE, '12345', FALSE);
+insert into customer (id, fullname, email, balance, is_broker, password_hash, blocked) values 
+  (1, 'Донат', 'shergalis.dv@edu.spbstu.ru', 150 * 100, FALSE, '12345', FALSE)
+, (2, 'Филипп', 'shergalis.fv@edu.spbstu.ru', 100000 * 100, FALSE, '12345', FALSE)
+, (3, 'Баффет', 'buffet.u@edu.spbstu.ru', 10000000 * 100, TRUE, '12345', FALSE)
+;
 
 
 /* assistaint (broker) is a user that is moderating other user's bargains */
@@ -52,8 +53,9 @@ create table assistant (
     primary key (id),
     foreign key (id) references customer (id)
 );
-insert into assistant (id, rate)
-  values (3, 0.01);
+insert into assistant (id, rate) values 
+  (3, 0.01)
+;
 
 
 
@@ -64,8 +66,7 @@ create table category (
     descr varchar(255) not null default '',
     primary key (id)
 );
-insert into category (id, title, descr)
-  values 
+insert into category (id, title, descr) values 
   (0, 'Другое', 'Товары, не подпадающие под конкретную категорию')
 , (10, 'Продовольствие', 'Сырьё для производства пищевых товаров (мука, крупы, овощи...)')
 , (20, 'Стройматериалы', 'Товары для промышленного строительства, домашнего ремонта и т.п.')
@@ -84,13 +85,13 @@ create table item (
     foreign key (category_id) references category (id)
 );
 
-insert into item (id, category_id, title, title_long) 
-values    /* 25: +++++++++++++++++++++++++ 70: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    (    0, 0,  'Другое', 'Другой товар')
-  , (10010, 10, 'Картофель бел. Азерб.', 'Картофель белый Азербайджан')
-  , (10020, 10, 'Капуста белокачанная', 'Капуста белокочанная (Brássica olerácea)')
-  , (20010, 20, 'Арматура 10мм x 50м', 'Стеклопластиковая арматура Армопласт 10 мм 50 м арт.507000636')
-  , (20020, 20, 'Арматура 12мм x 3м', 'Стеклопластиковая арматура Армопласт 12 мм 3 м. Арт. 507000629')
+insert into item (id, category_id, title, title_long) values    
+        /* 25: +++++++++++++++++++++++++ 70: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+  (    0, 0,  'Другое', 'Другой товар')
+, (10010, 10, 'Картофель бел. Азерб.', 'Картофель белый Азербайджан')
+, (10020, 10, 'Капуста белокачанная', 'Капуста белокочанная (Brássica olerácea)')
+, (20010, 20, 'Арматура 10мм x 50м', 'Стеклопластиковая арматура Армопласт 10 мм 50 м арт.507000636')
+, (20020, 20, 'Арматура 12мм x 3м', 'Стеклопластиковая арматура Армопласт 12 мм 3 м. Арт. 507000629')
 ;
 
 
@@ -99,15 +100,15 @@ values    /* 25: +++++++++++++++++++++++++ 70: +++++++++++++++++++++++++++++++++
 /* information about bargain */
 create table bargain (
     id int,
-    item_id int not null default 0,            /* id of some common item (e.g. potatoes ) */
+    item_id int not null default 0,                          /* id of some common item (e.g. potatoes ) */
     customer_owner_id int not null,                          /* id of customer that created the bargain */
     assistant_id int not null,                               /* randomly chosen within active assistants */
 
     future timestamp null,                                   /* date at which the bargain should be done */
-    time_begin datetime not null default current_timestamp,  /* creation date */
+    created datetime not null default current_timestamp,     /* creation date */
     time_end datetime null,                                  /* betting deadline */
     is_sell boolean not null default true,                   /* if owner is selling, otherwise is buying */
-    closed boolean not null default false,                   /* deleted or done */
+    is_closed boolean not null default false,                   /* deleted or done */
     start_bet int not null default 100,                      /* minimal/maximal sum of bet */
 
     title varchar(70),
@@ -119,11 +120,10 @@ create table bargain (
     foreign key (item_id) references item (id),
     check (start_bet >= 100)
 );
-insert into bargain (id, item_id, customer_owner_id, assistant_id, future, time_begin, time_end, is_sell, closed, start_bet, title, descr)
+insert into bargain (id, item_id, customer_owner_id, assistant_id, future, created, time_end, is_sell, is_closed, start_bet, title, descr)
   values 
   (1, 10010, 1, 3, NULL, current_timestamp, current_timestamp, FALSE, FALSE, 100, 'Продам картоплю.', 'Картопля свежая.')
 ;
-
 
 
 
@@ -156,7 +156,7 @@ create table bargain_completed (
     time_end datetime null,            /* when confirmed by assistant */
     exec_end datetime null,            /* execution time (if is future) */
     bargain_bet_id int not null, 
-                                       
+                                      
     amount int not null,               /* in currency minor units */
     fee int not null,                  /* goes to assistant */
     total int not null,                /* total = amount - fee */
@@ -182,7 +182,7 @@ create table receipt (
     recipient_fullname int not null,
     assistant_id int not null,         /* receives fee */
     assistant_fullname int not null,
-                                       
+                                      
     amount int not null,               /* in currency minor units */
     fee int not null,                  /* goes to assistant */
     total int not null,                /* total = amount - fee */
@@ -215,7 +215,7 @@ create table bank_transaction (
     -- constraint total_sum check (amount  - fee = total),
     -- constraint fee_incoming check (incoming and fee = 0 or not incoming and fee >= 0)
 );
- 
+
 /* =============================================== */
 /* FULL CLEAR */
 /* =============================================== */

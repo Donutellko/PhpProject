@@ -48,11 +48,11 @@ values    /* 25: +++++++++++++++++++++++++ 70: +++++++++++++++++++++++++++++++++
 ;
 
 
-insert into bargain (id, item_id, customer_owner_id, assistant_id, future, time_begin, time_end, is_sell, closed, start_bet, title, descr)
+insert into bargain (id, item_id, customer_owner_id, assistant_id, future, created, time_end, is_sell, is_closed, start_bet, title, descr)
   values 
-  (1, 10010, 1, 3, NULL, current_timestamp, current_timestamp, FALSE, FALSE, 100, 'Продам картоплю 100кг.', 'Картопля свежая.'),
-  (2, 10010, 1, 3, NULL, current_timestamp, current_timestamp, FALSE, FALSE, 100, 'Продам ещё картоплю 5кг.', 'Завалялась ещё картопля, оказуется.'),
-  (3, 10030, 2, 3, NULL, current_timestamp, current_timestamp, true, FALSE, 100, 'Хочу баклажан', 'Ребятки, выручайте, нужно 800кг баклажанов.')
+  (1, 10010, 1, 3, NULL, current_timestamp, current_timestamp, FALSE, true, 100, 'Прода м картоплю 100кг.', 'Картопля свежая.'),
+  (2, 10010, 1, 3, NULL, current_timestamp, current_timestamp, FALSE, true, 100, 'Продам ещё картоплю 5кг.', 'Завалялась ещё картопля, оказуется.'),
+  (3, 10030, 2, 3, NULL, current_timestamp, current_timestamp, true, false, 100, 'Хочу баклажан', 'Ребятки, выручайте, нужно 800кг баклажанов.')
 ;
 
   

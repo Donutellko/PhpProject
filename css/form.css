@@ -1,0 +1,13 @@
+.form-wrapper {
+    margin: auto;
+    max-width: 400pt;
+    min-width: 300pt;
+}
+
+#login-submit,
+#register-submit {
+    margin: 15pt auto 5pt;
+    background-color: red;
+    color: white;
+    width: 100%;
+}

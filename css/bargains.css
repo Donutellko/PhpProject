@@ -1,0 +1,24 @@
+.bargains-list {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: flex-start;
+    padding: 20pt;
+}
+
+.bargain {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 200pt;
+    margin-bottom: 20pt;
+}
+
+.bargain>h4 {
+    margin: 10pt;
+}
+
+.bargain>p {
+    margin: 0 10pt 5pt;
+}

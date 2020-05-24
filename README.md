@@ -7,9 +7,10 @@
 
 # Snippets (php/)
 
-## header_login
+## header
 
-Log in button, if not logged in, or link to cabinet.php otherwise
+* Logo
+* Log in button, if not logged in, or link to cabinet.php otherwise
 
 ## bargains_hot
 

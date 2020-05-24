@@ -1,0 +1,42 @@
+header {
+    background-color: red;
+    color: white;
+}
+
+.header-content {
+    margin: auto;
+    max-width: 70vw;
+    width: 750pt;
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.divider {
+    flex-grow: 1;
+}
+
+.logo {
+    display: flex;
+    text-decoration: none;
+}
+
+.logo>img {
+    width: 30pt;
+    height: 30pt;
+}
+
+.logo>span {
+    margin: 10pt;
+    display: inline;
+}
+
+.sitename {
+    text-decoration: none;
+}
+
+.login {}
+
+.login>a {
+    text-decoration: none;
+}
