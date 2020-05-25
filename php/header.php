@@ -1,3 +1,4 @@
+
 <header class="w3-container w3-red w3-padding">
     <div class="header-content">
 
@@ -11,9 +12,9 @@
 
         <div class="login w3-button w3-white-text">
             <?php
-            if (!isset($_SESSION["login"])) {
+            if (!isset($_SESSION["customer_id"])) {
             ?>
-                <a href="login.php">
+                <a href="login.php?redirect=<?php echo urlencode($_SERVER['REQUEST_URI']) ?>">
                     Войти
                 </a>
             <?php

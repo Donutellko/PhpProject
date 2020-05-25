@@ -4,7 +4,8 @@
 
 <?php
 
-$bargains = mysqli_query($link, "select * from exchange.bargain where id=" . ($_GET['id'] - 0) . ";");
+$query = "select * from exchange.bargain where id=" . escape($_GET['id']) . ";";
+$bargains = mysqli_query($link, $query);
 if ($bargains->num_rows == 1) {
     $bargain = mysqli_fetch_array($bargains);
     $query = "select * 

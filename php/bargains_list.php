@@ -10,7 +10,7 @@
             ?><div class='bargain w3-card-4'>
                     <h4 class=''><?php echo $bargain->title ?></h4>
                     <p class=''><?php echo $bargain->descr ?></p>
-                    <p></p>
+                    <p></p> 
                     <a class="w3-btn w3-red" href="bargain.php?id=<?php echo $bargain->id ?>">
                         <?php echo $bargain->is_sell ? "Купить" : "Предложить" ?>
                     </a>

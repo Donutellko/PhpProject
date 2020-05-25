@@ -1,3 +1,8 @@
+# Features
+
+* If you press Log in on some page, you will be redirected back after login
+
+
 # Pages
 
 ## index.php

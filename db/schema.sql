@@ -216,6 +216,28 @@ create table bank_transaction (
     -- constraint fee_incoming check (incoming and fee = 0 or not incoming and fee >= 0)
 );
 
+
+DELIMITER $$
+--
+-- Create function `login`
+--
+CREATE FUNCTION login (_email varchar(255), _password varchar(255))
+RETURNS int
+SQL SECURITY INVOKER
+BEGIN
+  DECLARE customer_id int;
+  set customer_id = -1;
+  SELECT
+    customer.id INTO customer_id
+  FROM exchange.customer customer
+  WHERE customer.email = _email
+  AND customer.password_hash = PASSWORD(_password);
+
+  RETURN customer_id;
+END
+$$
+
+
 /* =============================================== */
 /* FULL CLEAR */
 /* =============================================== */

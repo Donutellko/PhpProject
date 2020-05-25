@@ -13,7 +13,7 @@
         <?php include("php/header.php") ?>
 
         <article>
-            <?php $bargains = mysqli_query($link, "select * from exchange.bargain;"); ?>
+            <?php $bargains = mysqli_query($link, "select * from exchange.bargain where is_closed = false;"); ?>
             <?php include("php/bargains_list.php") ?>
         </article>
 

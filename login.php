@@ -2,11 +2,24 @@
 
 <?php
 
-if (isset($_POST['login']) && isset($_POST['password'])) {
-    $query = "SELECT project.login('" . $_POST['login'] . "','" . $_POST['password'] . "') login";
-    $result = mysqli_query($link, $query);
-} else if (isset($_SESSION['username'])) {
-    $redirect = $CONTEXT_ROOT . (isset($_GET['redirect']) ? $_GET['redirect'] : '/cabinet.php');
+if (isset($_POST['email']) && isset($_POST['email'])) {
+    $query = "SELECT exchange.login('" . escape($_POST['email']) . "','" . escape($_POST['password']) . "') customer_id";
+    $customer_id = mysqli_fetch_array(mysqli_query($link, $query))['customer_id'];
+    echo $query, $customer_id;
+    if ($customer_id > 0) {
+        $query = "select * from exchange.customer where id=" . $customer_id;
+        $customer = mysqli_fetch_array(mysqli_query($link, $query));
+
+        $_SESSION['customer_id'] = $customer_id;
+        $_SESSION['email'] = $customer['email'];
+        $_SESSION['fullname'] = $customer['fullname'];
+    } else {
+        $error = 'Неверный логин или пароль.';
+    }
+}
+
+if (isset($_SESSION['email'])) {
+    $redirect = isset($_GET['redirect'])? urldecode($_GET['redirect']) : 'cabinet.php';
     header('Location: ' . $redirect);
     exit();
 }
@@ -32,11 +45,11 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
                 ?>
                     <form id="login-form" action="login.php" method="post" class="w3-card-4 w3-container w3-padding">
 
-                        <label>Логин:</label>
-                        <input type="text" name="username" class="w3-input">
+                        <label>Эл.почта:</label>
+                        <input type="text" name="email" class="w3-input">
 
                         <label>Пароль:</label>
-                        <input type="text" name="password" class="w3-input">
+                        <input type="password" name="password" class="w3-input">
 
 
                         <button id="login-submit" type="submit" class="w3-button">Войти</button>
@@ -50,15 +63,24 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
                 } else {
                 ?>
                     <form id="register-form" action="register.php" method="post" class="w3-card-4 w3-container w3-padding"> 
-
-                        <label>Логин:</label>
-                        <input type="text" name="username">
-
+                        
                         <label>ФИО:</label>
-                        <input type="text" name="fullname">
+                        <input type="text" name="fullname" class="w3-input">
+                        
+                        <label>Город:</label>
+                        <input type="addre" name="city" class="w3-input">
+
+                        <label>Номер телефона:</label>
+                        <input type="tel" name="email" class="w3-input">
+
+                        <label>Эл.почта:</label>
+                        <input type="text" name="email" class="w3-input">
 
                         <label>Пароль:</label>
-                        <input type="text" name="password">
+                        <input type="password" name="password" class="w3-input">
+
+                        <label>Повторите пароль:</label>
+                        <input type="password" name="password" class="w3-input">
 
                         <button id="register-submit" type="submit" class="w3-button">Зарегистрироваться</button>
                     </form>
@@ -71,5 +93,10 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 
         <?php include("php/footer.php") ?>
 </body>
+<?php
+if (isset($error)) {
+    echo '<script>alert("' . $error . '");</script>';
+}
+?>
 
 </html>
