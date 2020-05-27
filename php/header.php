@@ -1,4 +1,3 @@
-
 <header class="w3-container w3-red w3-padding">
     <div class="header-content">
 
@@ -11,19 +10,22 @@
         <div class="divider"></div>
 
         <div class="login w3-button w3-white-text">
+            <a href="cabinet.php">
+                <?php echo $_SESSION["fullname"] ?>
+            </a>
+        </div>
+        <div class="login w3-button w3-white-text">
             <?php
             if (!isset($_SESSION["customer_id"])) {
-            ?>
+                ?>
                 <a href="login.php?redirect=<?php echo urlencode($_SERVER['REQUEST_URI']) ?>">
                     Войти
                 </a>
-            <?php
+                <?php
             } else {
-            ?>
-                <a href="cabinet.php">
-                    <?php echo $_SESSION["fullname"] ?>
-                </a>
-            <?php
+                ?>
+                <a href="logout.php">Выход</a>
+                <?php
             }
             ?>
         </div>

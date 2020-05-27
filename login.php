@@ -3,16 +3,14 @@
 <?php
 
 if (isset($_POST['email']) && isset($_POST['email'])) {
-    $query = "SELECT exchange.login('" . escape($_POST['email']) . "','" . escape($_POST['password']) . "') customer_id";
-    $customer_id = mysqli_fetch_array(mysqli_query($link, $query))['customer_id'];
+    $customer_id = login($_POST['email'], $_POST['email']);
     echo $query, $customer_id;
     if ($customer_id > 0) {
-        $query = "select * from exchange.customer where id=" . $customer_id;
-        $customer = mysqli_fetch_array(mysqli_query($link, $query));
+        $customer = get_customer_by_id($customer_id);
 
         $_SESSION['customer_id'] = $customer_id;
-        $_SESSION['email'] = $customer['email'];
-        $_SESSION['fullname'] = $customer['fullname'];
+        $_SESSION['email'] = $customer->email;
+        $_SESSION['fullname'] = $customer->fullname;
     } else {
         $error = 'Неверный логин или пароль.';
     }

@@ -3,14 +3,18 @@
 $host = 'localhost';        // адрес сервера 
 $database = 'exchange';     // имя базы данных
 $user = 'exchange';         // имя пользователя
-$password = 'exchange';     // пароль 
+$password = 'exchange';     // пароль
+$charset = 'utf8mb4';       // кодировка
 
-$link = mysqli_connect($host, $user, $password, $database) 
-    or die("Ошибка подключения БД: " . mysqli_error($link));
-    
-function escape($str) {
-    global $link;
-    return mysqli_real_escape_string($link, $str);
+
+$dsn = "mysql:host=$host;dbname=$database;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+try {
+    $pdo = new PDO($dsn, $user, $password, $options);
+} catch (\PDOException $e) {
+    throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
-
-?>

@@ -2,11 +2,9 @@
 
     <?php
 
-    if ($bargains->num_rows > 0) {
+    if (count($bargains) > 0) {
 
-        while ($row = mysqli_fetch_array($bargains)) {
-            $bargain = (object) $row;
-
+        foreach ($bargains as $bargain) {
             ?><div class='bargain w3-card-4'>
                     <h4 class=''><?php echo $bargain->title ?></h4>
                     <p class=''><?php echo $bargain->descr ?></p>
@@ -22,7 +20,5 @@
         <div class="label">Сейчас нет доступных сделок. Зайдите позже или добавьте свою!</div>
     <?php
     }
-
-    $link->close();
     ?>
 </div>
