@@ -10,33 +10,33 @@ function fetch_array($stmt) {
 
 function login($email, $password) {
     global $pdo;
-    $stmt = $pdo->prepare("select exchange.login('?','?') customer_id;");
+    $stmt = $pdo->prepare("select exchange.login(?,?) customer_id;");
     $stmt->execute([$email, $password]);
-    return $stmt->fetch()['customer_id'];
+    return $stmt->fetch()['customer_id'] ;
 }
 
 function get_customer_by_email($email) {
     global $pdo;
-    $stmt = $pdo->prepare("select * from customer where lower(email) = lower(:email);");
-    $stmt->execute(['email' => $email]);
+    $stmt = $pdo->prepare("select * from customer where lower(email) = lower(?);");
+    $stmt->execute([$email]);
     return (object) $stmt->fetch();
 }
 
 function get_customer_by_id($id) {
     global $pdo;
-    $stmt = $pdo->prepare("select * from customer where id = :id;");
-    $stmt->execute(['id' => $id]);
+    $stmt = $pdo->prepare("select * from customer where id = ?;");
+    $stmt->execute([$id]);
     return (object) $stmt->fetch();
 }
 
 function get_assistant_by_id($id) {
     global $pdo;
-    $stmt = $pdo->prepare("select * from assistant where id = :id;");
-    $stmt->execute(['id' => $id]);
+    $stmt = $pdo->prepare("select * from assistant where id = ?;");
+    $stmt->execute([$id]);
     return (object) $stmt->fetch();
 }
 
-$select_bargain = "select bargain.*, 
+$select_bargain = "select bargain.*
     c.id as category_id, c.title as category_title,
     i.id as item_id, i.title as item_title, i.title_long as item_title_long 
 from bargain
@@ -62,6 +62,17 @@ function get_bargains_by_owner($owner_id, $is_closed = false) {
     global $pdo;
     $stmt = $pdo->prepare("select * from bargain where customer_owner_id = ? and is_closed = ?;");
     $stmt->execute([$owner_id, $is_closed]);
+    return fetch_array($stmt);
+}
+
+function search_bargains($filters) {
+    global $pdo, $select_bargain;
+    $stmt = $pdo->prepare($select_bargain .
+     "where 
+        ((:category = '') or (c.id = :category)) 
+        and ((:item = '') or (i.id = :item))
+        and (is_closed = false)");
+    $stmt->execute($filters);
     return fetch_array($stmt);
 }
 

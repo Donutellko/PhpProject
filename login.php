@@ -2,9 +2,8 @@
 
 <?php
 
-if (isset($_POST['email']) && isset($_POST['email'])) {
-    $customer_id = login($_POST['email'], $_POST['email']);
-    echo $query, $customer_id;
+if (isset($_POST['email']) && isset($_POST['password'])) {
+    $customer_id = login($_POST['email'], $_POST['password']);
     if ($customer_id > 0) {
         $customer = get_customer_by_id($customer_id);
 

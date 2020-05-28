@@ -10,14 +10,18 @@
                     <p class=''><?php echo $bargain->descr ?></p>
                     <p></p> 
                     <a class="w3-btn w3-red" href="bargain.php?id=<?php echo $bargain->id ?>">
-                        <?php echo $bargain->is_sell ? "Купить" : "Предложить" ?>
+                        <?php
+                        if ($_SESSION['customer_id'] == $bargain->customer_owner_id) echo 'Открыть';
+                        else if ($_SESSION['customer_id'] == $bargain->assistant_id) echo 'Открыть';
+                            else echo $bargain->is_sell ? "Купить" : "Предложить" ;
+                        ?>
                     </a>
                 </div>
             <?php
         }
     } else {
         ?>
-        <div class="label">Сейчас нет доступных сделок. Зайдите позже или добавьте свою!</div>
+        <div class="label">Сейчас нет доступных сделок по заданным критериям. Зайдите позже или добавьте свою!</div>
     <?php
     }
     ?>

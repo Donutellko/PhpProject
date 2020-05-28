@@ -13,7 +13,7 @@
         <?php include("php/header.php") ?>
 
         <article>
-            <?php $bargains = get_bargains(); print_r($bargains)?>
+            <?php $bargains = get_bargains() ?>
             <?php include("php/bargains_list.php") ?>
         </article>
 

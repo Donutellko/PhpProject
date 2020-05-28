@@ -39,9 +39,9 @@ create table customer (
     primary key (id)
 );
 insert into customer (id, fullname, email, balance, is_broker, password_hash, blocked) values 
-  (1, 'Донат', 'shergalis.dv@edu.spbstu.ru', 150 * 100, FALSE, '12345', FALSE)
-, (2, 'Филипп', 'shergalis.fv@edu.spbstu.ru', 100000 * 100, FALSE, '12345', FALSE)
-, (3, 'Баффет', 'buffet.u@edu.spbstu.ru', 10000000 * 100, TRUE, '12345', FALSE)
+  (1, 'Донат', 'shergalis.dv@edu.spbstu.ru', 150 * 100, FALSE, SHA1('12345'), FALSE)
+, (2, 'Филипп', 'shergalis.fv@edu.spbstu.ru', 100000 * 100, FALSE, SHA1('12345'), FALSE)
+, (3, 'Баффет', 'buffet.u@edu.spbstu.ru', 10000000 * 100, TRUE, SHA1('12345'), FALSE)
 ;
 
 
@@ -231,7 +231,7 @@ BEGIN
     customer.id INTO customer_id
   FROM exchange.customer customer
   WHERE customer.email = _email
-  AND customer.password_hash = PASSWORD(_password);
+  AND customer.password_hash = SHA1(_password);
 
   RETURN customer_id;
 END
@@ -242,13 +242,13 @@ $$
 /* FULL CLEAR */
 /* =============================================== */
 
-delete from bargain_bet;
-delete from bargain;
+delete from bargain_bet where 1 = 1;
+delete from bargain where 1 = 1;
 
-delete from assistant;
-delete from customer;
+delete from assistant where 1 = 1;
+delete from customer where 1 = 1;
 
-delete from item;
-delete from category;
+delete from item where 1 = 1;
+delete from category where 1 = 1;
 
 

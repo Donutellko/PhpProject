@@ -5,7 +5,7 @@
 <?php
 
 $bargain = get_bargain_by_id($_GET['id']);
-if (empty($bargain)) {
+if (!isset($bargain->id)) {
     http_response_code(404);
     include('php/404.php');
     exit;
@@ -15,8 +15,8 @@ $customer_owner = get_customer_by_id($bargain->customer_owner_id);
 $assistant = get_assistant_by_id($bargain->assistant_id);
 $bets = get_bets_by_bargain_id($bargain->id);
 
-$user_is_owner = !empty($_SESSION['user_id']) && $bargain->customer_owner_id != $_SESSION['user_id'];
-$user_is_assistant = !empty($_SESSION['user_id']) && $bargain->assistant_id != $_SESSION['user_id'];
+$user_is_owner = !empty($_SESSION['customer_id']) && $bargain->customer_owner_id != $_SESSION['customer_id'];
+$user_is_assistant = !empty($_SESSION['customer_id']) && $bargain->assistant_id != $_SESSION['customer_id'];
 
 ?>
 
@@ -43,17 +43,25 @@ $user_is_assistant = !empty($_SESSION['user_id']) && $bargain->assistant_id != $
             } else {
             ?>
                 <h2> <?php echo $bargain->title; ?> </h2>
+                <?php if ($bargain->is_closed) echo '<h3 class="w3-red">Сделка закрыта.</h3>' ?>
                 <div class="descr w3-margin-bottom"> <?php echo $bargain->descr; ?> </div>
                 <div class="addinfo">
                     <h4> Информация о сделке: </h4>
                     <p>Размещено: <?php echo $bargain->created; ?></p>
                     <p>Начальная ставка: <?php echo $bargain->start_bet; ?>руб. </p>
-                    <p>Текущая ставка: <?php echo (empty($bet) ?  'Отсутствует' : '<b>' . $bet->amount . 'руб. </b>'); ?> </p>
+                    <p>Текущая ставка: <?php echo (empty($bets) ?  'Отсутствует' : '<b>' . $bets[0]->amount . 'руб. </b>'); ?> </p>
                     <p>Ставка брокера: <?php echo $assistant->rate - 0; ?>%</p>
                 </div>
                 <?php
 
-                if (true || $user_is_owner || $user_is_assistant) {
+                if ($user_is_owner) {
+                    ?>
+                        <h2>Управление сделкой:</h2>
+
+                    <?php
+                }
+
+                if ($user_is_owner || $user_is_assistant) {
                 ?>
                     <h2>Ставки:</h2>
                     <p class="w3-margin-bottom">Информация обо всех совершённых ставках видна только создателю сделки, её брокеру и модераторам. 
@@ -64,10 +72,11 @@ $user_is_assistant = !empty($_SESSION['user_id']) && $bargain->assistant_id != $
                             ?>
                                 <div class="bet">
                                     <?php 
+                                        echo "<a class='w3-btn w3-green' href='bargain.php?id=$bargain->id&complete=$bet->id'>Заключить сделку </a>";
                                         echo $bet->created . ': ';
                                         echo '<b>' . $bet->amount . 'руб. </b>' ;
                                         echo (empty($bet->comment) ? 'Сообщение отсутствует.' : 'Сообщение: ' . $bet->comment);
-                                    ?> 
+                                    ?>
                                 </div>
                             <?php
                         }
@@ -87,7 +96,3 @@ $user_is_assistant = !empty($_SESSION['user_id']) && $bargain->assistant_id != $
 </body>
 
 </html>
-
-<?php
-$link->close();
-?>
