@@ -1,9 +1,9 @@
 <?php include('php/init.php') ?>
 
-<b>_SERVER: </b> <?php print_r($_SERVER) ?> <br><br>
-<b>_SESSION: </b> <?php print_r($_SESSION) ?> <br><br>
-<b>_GET: </b> <?php print_r($_GET) ?> <br><br>
-<b>_POST: </b> <?php print_r($_POST) ?> <br><br>
+<b>_SERVER: </b> <pre> <?php print_r($_SERVER) ?> </pre><br><br>
+<b>_SESSION: </b> <pre> <?php print_r($_SESSION) ?> </pre><br><br>
+<b>_GET: </b> <pre> <?php print_r($_GET) ?> </pre><br><br>
+<b>_POST: </b> <pre> <?php print_r($_POST) ?> </pre><br><br>
 
 
 <b>encode: </b> <?php 

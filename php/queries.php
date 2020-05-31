@@ -1,13 +1,5 @@
 <?php
 
-function fetch_array($stmt) {
-    $rows = [];
-    foreach ($stmt as $row) {
-        array_push($rows, (object) $row);
-    }
-    return $rows;
-}
-
 function login($email, $password) {
     global $pdo;
     $stmt = $pdo->prepare("select exchange.login(?,?) customer_id;");
@@ -33,10 +25,10 @@ function get_assistant_by_id($id) {
     global $pdo;
     $stmt = $pdo->prepare("select * from assistant where id = ?;");
     $stmt->execute([$id]);
-    return (object) $stmt->fetch();
+    return $stmt->fetch();
 }
 
-$select_bargain = "select bargain.*
+$select_bargain = "select bargain.*,
     c.id as category_id, c.title as category_title,
     i.id as item_id, i.title as item_title, i.title_long as item_title_long 
 from bargain
@@ -48,21 +40,21 @@ function get_bargain_by_id($id) {
     global $pdo, $select_bargain;
     $stmt = $pdo->prepare($select_bargain . " where bargain.id = ?;");
     $stmt->execute([$id]);
-    return (object)$stmt->fetch();
+    return $stmt->fetch();
 }
 
 function get_bargains($is_closed = false) {
     global $pdo;
     $stmt = $pdo->prepare("select * from bargain where is_closed = ?;");
     $stmt->execute([$is_closed]);
-    return fetch_array($stmt);
+    return $stmt->fetchAll();
 }
 
 function get_bargains_by_owner($owner_id, $is_closed = false) {
     global $pdo;
     $stmt = $pdo->prepare("select * from bargain where customer_owner_id = ? and is_closed = ?;");
     $stmt->execute([$owner_id, $is_closed]);
-    return fetch_array($stmt);
+    return $stmt->fetchAll();
 }
 
 function search_bargains($filters) {
@@ -73,19 +65,50 @@ function search_bargains($filters) {
         and ((:item = '') or (i.id = :item))
         and (is_closed = false)");
     $stmt->execute($filters);
-    return fetch_array($stmt);
+    return $stmt->fetchAll();
 }
 
 function get_bets_by_bargain_id($id) {
     global $pdo;
     $stmt = $pdo->prepare("select * from bargain_bet where bargain_id = ?;");
     $stmt->execute([$id]);
-    return fetch_array($stmt);
+    return $stmt->fetchAll();
 }
 
 function get_bets_by_customer_id($id) {
     global $pdo;
     $stmt = $pdo->prepare("select * from bargain_bet where customer_id = ?;");
     $stmt->execute([$id]);
-    return fetch_array($stmt);
+    return $stmt->fetchAll();
+}
+
+function get_categories() {
+    global $pdo;
+    $stmt = $pdo->prepare("select * from category");
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function get_items_by_category($id) {
+    global $pdo;
+    $stmt = $pdo->prepare("select * from item where category_id = ?;");
+    $stmt->execute([$id]);
+    return $stmt->fetchAll();
+}
+
+function create_bargain($info) {
+    global $pdo;
+    $stmt = $pdo->prepare("
+        insert into bargain ( customer_owner_id,  assistant_id,  item_id,  future,  time_end,  is_sell,  start_bet,  title,  descr)
+                     values (:customer_owner_id, :assistant_id, :item_id, :future, :time_end, :is_sell, :start_bet, :title, :descr)");
+     $stmt->execute($info);
+}
+
+function get_random_assistant() {
+    global $pdo;
+    $stmt = $pdo->prepare("select * from assistant where active=1");
+    $stmt->execute();
+    $assistants = $stmt->fetchAll();
+    $rand = array_rand($assistants);
+    return $assistants[$rand];
 }

@@ -1,7 +1,7 @@
 <?php
 
-include "../php/init.php";
+//session_start();
 
-function or_else($array, $index, $default) {
-    return isset($array[$index]) ? $array[$index] : $default;
-}
+include "../php/connect.php";
+include "../php/queries.php";
+include "../php/utils.php";

@@ -19,6 +19,19 @@ if (empty($_SESSION['customer_id'])) {
 
         <article>
 
+            <div>
+                <a href="create.php" class="w3-btn w3-green">Добавить предложение</a>
+                <a href="setting.php" class="w3-btn w3-border">Настройки</a>
+                <a href="" class="w3-btn w3-border">Пополнить счёт</a>
+                <a href="" class="w3-btn w3-border">Вывести деньги</a>
+                <a href="" class="w3-btn w3-border">История операций</a>
+            </div>
+
+            <h2>Информация об аккаунте</h2>
+            <?php
+
+            ?>
+
             <h2>Ваши текущие сделки</h2>
 
             <?php

@@ -5,8 +5,9 @@ $_SESSION["stage"] = "start";
 $APP_NAME = "Эпсилон-Биржа";
 $CONTEXT_ROOT = $_SERVER['CONTEXT_PREFIX'];
 
-include("connect.php"); // $link
-include("queries.php"); // $link
+include("connect.php");
+include("queries.php");
+include("utils.php");
 
 ?>
 
