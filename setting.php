@@ -24,9 +24,14 @@ if (empty($_SESSION['customer_id'])) {
         </div>
 
         <h2>Настройки аккаунта</h2>
-        <?php
 
-        ?>
+        <form action="">
+            <label>Email:
+                <input type="text" class="w3-input" value="<?php echo $_SESSION['email'] ?>">
+            </label>
+
+            <button type="submit">Сохранить изменения</button>
+        </form>
     </article>
 </div>
 </body>

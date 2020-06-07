@@ -4,7 +4,20 @@ function login($email, $password) {
     global $pdo;
     $stmt = $pdo->prepare("select exchange.login(?,?) customer_id;");
     $stmt->execute([$email, $password]);
-    return $stmt->fetch()['customer_id'] ;
+    return $stmt->fetch()->customer_id ;
+}
+
+function register($data) {
+    global $pdo;
+    $stmt = $pdo->prepare("select exchange.register(:email, :password, :fullname, :city) customer_id;");
+    $stmt->execute($data);
+    return $stmt->fetch()->customer_id;
+}
+
+function confirm_email($email) {
+    global $pdo;
+    $stmt = $pdo->prepare("update exchange.customer set confirm_code = null where email = ?;");
+    $stmt->execute([$email]);
 }
 
 function get_customer_by_email($email) {

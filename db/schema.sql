@@ -36,7 +36,9 @@ create table customer (
     is_broker bool default false,       /* customer is also an assistant/broker */
     password_hash varchar(255) not null,
     blocked boolean default false,
-    primary key (id)
+    confirm_code int default (1000 + 10000 * rand()), /* empty if is confirmed*/
+    primary key (id),
+    unique (email)
 );
 insert into customer (id, fullname, email, balance, is_broker, password_hash, blocked) values 
   (1, 'Донат', 'shergalis.dv@edu.spbstu.ru', 150 * 100, FALSE, SHA1('12345'), FALSE)
@@ -217,24 +219,46 @@ create table bank_transaction (
 );
 
 
-DELIMITER $$
+delimiter $$
 --
--- Create function `login`
+-- create function `login`
 --
-CREATE FUNCTION login (_email varchar(255), _password varchar(255))
-RETURNS int
-SQL SECURITY INVOKER
-BEGIN
-  DECLARE customer_id int;
-  set customer_id = -1;
-  SELECT
-    customer.id INTO customer_id
-  FROM exchange.customer customer
-  WHERE customer.email = _email
-  AND customer.password_hash = SHA1(_password);
+create function login(_email varchar(255), _password varchar(255))
+    returns int
+    sql security invoker
+begin
+    declare _id int;
+    set _id = -1;
+    select customer.id
+    into _id
+    from exchange.customer customer
+    where customer.email = _email
+      and customer.password_hash = sha1(_password);
 
-  RETURN customer_id;
-END
+    return _id;
+end
+$$
+
+
+delimiter $$
+--
+-- create function `register`
+--
+create function register(_email varchar(255), _password varchar(255), _fullname varchar(255), _city varchar(255))
+    returns int
+    sql security invoker
+begin
+    declare _id int;
+    set _id = -1;
+    select max(customer.id) + 1
+        into _id
+        from exchange.customer customer;
+
+    insert into customer (id, fullname, email, balance, is_broker, password_hash, blocked)
+                values (_id, _fullname, _email, 0, false, sha1(_password), false);
+
+    return _id;
+end
 $$
 
 

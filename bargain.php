@@ -85,6 +85,10 @@ $user_is_assistant = !empty($_SESSION['customer_id']) && $bargain->assistant_id 
                                 <div class="label">Ставок нет.</div>
                             <?php
                     }
+                } else if (!empty($_SESSION['id'])) {
+                    ?>
+                    <a href="bet.php?id=<?php echo $bargain->id ?>"></a>
+                    <?php
                 }
             }
             ?>
