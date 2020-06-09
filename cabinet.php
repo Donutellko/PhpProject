@@ -4,6 +4,9 @@
 if (empty($_SESSION['customer_id'])) {
     header('Location: ' . 'index.php');
     exit;
+} else if ($_SESSION['role'] == 'ADMIN') {
+    header('Location: ' . 'admin.php');
+    exit;
 }
 ?>
 

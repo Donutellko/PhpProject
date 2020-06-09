@@ -33,17 +33,21 @@ create table customer (
     fullname varchar(70) not null,
     email varchar(70) not null,
     balance bigint default 0,
-    is_broker bool default false,       /* customer is also an assistant/broker */
     password_hash varchar(255) not null,
     blocked boolean default false,
     confirm_code int default (1000 + 10000 * rand()), /* empty if is confirmed*/
+    role varchar(70) not null default 'CUSTOMER',
     primary key (id),
     unique (email)
 );
-insert into customer (id, fullname, email, balance, is_broker, password_hash, blocked) values 
-  (1, 'Донат', 'shergalis.dv@edu.spbstu.ru', 150 * 100, FALSE, SHA1('12345'), FALSE)
-, (2, 'Филипп', 'shergalis.fv@edu.spbstu.ru', 100000 * 100, FALSE, SHA1('12345'), FALSE)
-, (3, 'Баффет', 'buffet.u@edu.spbstu.ru', 10000000 * 100, TRUE, SHA1('12345'), FALSE)
+insert into customer (id, fullname, email, balance, password_hash, role, confirm_code) values
+  (10, 'Админище', 'admin', 0, SHA1('admin'), 'ADMIN', null)
+, (30, 'Баффет', 'buffet.u@edu.spbstu.ru', 10000000 * 100, SHA1('12345'), 'ASSISTANT', null)
+;
+
+insert into customer (id, fullname, email, balance, password_hash, blocked, confirm_code) values
+  (10, 'Донат', 'shergalis.dv@edu.spbstu.ru', 150 * 100, SHA1('12345'), FALSE, null)
+, (20, 'Филипп', 'shergalis.fv@edu.spbstu.ru', 100000 * 100, SHA1('12345'), FALSE, null)
 ;
 
 
@@ -56,7 +60,7 @@ create table assistant (
     foreign key (id) references customer (id)
 );
 insert into assistant (id, rate) values 
-  (3, 0.01)
+  (30, 0.01)
 ;
 
 

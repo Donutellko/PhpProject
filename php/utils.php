@@ -14,4 +14,9 @@ function set_session($customer) {
     $_SESSION['email'] = $customer->email;
     $_SESSION['fullname'] = $customer->fullname;
     $_SESSION['confirm_code'] = $customer->confirm_code;
+    $_SESSION['role'] = $customer->role;
+}
+
+function reset_session() {
+    set_session(new stdClass());
 }

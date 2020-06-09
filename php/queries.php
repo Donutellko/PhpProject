@@ -49,9 +49,18 @@ join item i on i.id = bargain.item_id
 join category c on c.id = i.category_id
 ";
 
+// получить информацию о сделке
 function get_bargain_by_id($id) {
     global $pdo, $select_bargain;
     $stmt = $pdo->prepare($select_bargain . " where bargain.id = ?;");
+    $stmt->execute([$id]);
+    return $stmt->fetch();
+}
+
+// получить чистую запись о сделке без внешних полей
+function get_bargain_only_by_id($id) {
+    global $pdo;
+    $stmt = $pdo->prepare("select * from bargain where bargain.id = ?;");
     $stmt->execute([$id]);
     return $stmt->fetch();
 }
@@ -124,4 +133,31 @@ function get_random_assistant() {
     $assistants = $stmt->fetchAll();
     $rand = array_rand($assistants);
     return $assistants[$rand];
+}
+
+function get_customers() {
+    global $pdo;
+    $stmt = $pdo->prepare("select * from customer left join assistant using(id)");
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function update_customer($data) {
+    global $pdo;
+    $stmt = $pdo->prepare("update customer 
+            set email = :email, fullname = :fullname, balance = :balance, blocked = :blocked,
+            confirm_code = :confirm_code, role = :role, is_broker = :is_broker, password_hash = :password_hash
+            where id = :id");
+    $stmt->execute($data);
+}
+
+function update_bargain($data) {
+    global $pdo;
+    $stmt = $pdo->prepare("update bargain 
+            set 
+                id = :id, item_id = :item_id, customer_owner_id = :customer_owner_id, assistant_id = :assistant_id, 
+                future = :future, created = :created, time_end = :time_end, is_sell = :is_sell, 
+                is_closed = :is_closed, start_bet = :start_bet, title = :title, descr = :descr
+            where id = :id");
+    $stmt->execute($data);
 }
