@@ -11,7 +11,7 @@
 
         <div class="login w3-button w3-white-text">
             <a href="cabinet.php">
-                <?php echo $_SESSION["fullname"] ?>
+                <?php echo or_else($_SESSION, "fullname", null) ?>
             </a>
         </div>
         <div class="login w3-button w3-white-text">

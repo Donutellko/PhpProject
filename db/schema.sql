@@ -104,7 +104,7 @@ insert into item (id, category_id, title, title_long) values
 
 
 /* information about bargain */
-create table bargain (
+create table offer (
     id int,
     item_id int not null default 0,                          /* id of some common item (e.g. potatoes ) */
     customer_owner_id int not null,                          /* id of customer that created the bargain */

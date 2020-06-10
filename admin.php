@@ -77,6 +77,7 @@ if ($is_user && isset($_POST['id'])) {
                     <a href="?bargain=<?php echo $bargain->id ?>" style="text-decoration: none">
                         <div class='w3-card-4 w3-padding w3-margin-top'>
                             <h4 class=''><?php echo ($bargain->is_sell ? "[Продажа] " : "[Покупка] ") . $bargain->title ?></h4>
+                            <p class=''><?php echo '<b>владелец: ' . $bargain->owner_fullname . '</b>' ?></p>
                             <p class=''><?php echo $bargain->descr ?></p>
                         </div>
                     </a>

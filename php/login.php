@@ -6,7 +6,8 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         $customer = get_customer_by_id($customer_id);
 
         set_session($customer);
-        header('Location: cabinet.php');
+        $redirect = isset($_GET['redirect']) ? urldecode($_GET['redirect']) : 'cabinet.php';
+        header('Location: ' . $redirect);
     } else {
         $error = 'Неверный логин или пароль.';
     }

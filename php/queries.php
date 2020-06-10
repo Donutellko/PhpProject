@@ -43,10 +43,12 @@ function get_assistant_by_id($id) {
 
 $select_bargain = "select bargain.*,
     c.id as category_id, c.title as category_title,
-    i.id as item_id, i.title as item_title, i.title_long as item_title_long 
+    i.id as item_id, i.title as item_title, i.title_long as item_title_long,
+    owner.email as owner_email, owner.fullname as owner_fullname
 from bargain
 join item i on i.id = bargain.item_id
 join category c on c.id = i.category_id
+join customer owner on owner.id = bargain.customer_owner_id
 ";
 
 // получить информацию о сделке
@@ -66,8 +68,8 @@ function get_bargain_only_by_id($id) {
 }
 
 function get_bargains($is_closed = false) {
-    global $pdo;
-    $stmt = $pdo->prepare("select * from bargain where is_closed = ?;");
+    global $pdo, $select_bargain;
+    $stmt = $pdo->prepare($select_bargain ." where is_closed = ?;");
     $stmt->execute([$is_closed]);
     return $stmt->fetchAll();
 }

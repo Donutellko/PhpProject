@@ -8,7 +8,7 @@ if (isset($_SESSION['email']) && empty($_SESSION['confirm_code'])) {
     exit();
 }
 
-if (!empty($_SESSION['confirm_code'] && !isset($_GET['confirm']))) {
+if (!empty($_SESSION['confirm_code']) && !isset($_GET['confirm'])) {
     header('Location: ?confirm');
 }
 
@@ -57,14 +57,13 @@ if ($is_login) {
             <?php
             if ($is_login) {
                 ?>
-                <form id="login-form" action="login.php" method="post" class="w3-card-4 w3-container w3-padding">
+                <form id="login-form" method="post" class="w3-card-4 w3-container w3-padding">
 
                     <label>Эл.почта:</label>
                     <input type="text" name="email" class="w3-input">
 
                     <label>Пароль:</label>
                     <input type="password" name="password" class="w3-input">
-
 
                     <button id="login-submit" type="submit" class="w3-button">Войти</button>
                 </form>

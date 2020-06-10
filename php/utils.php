@@ -1,6 +1,6 @@
 <?php
 
-function or_else($array, $index, $default) {
+function or_else($array, $index, $default = null) {
     return isset($array[$index]) ? $array[$index] : $default;
 }
 

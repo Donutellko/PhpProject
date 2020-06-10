@@ -23,6 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     create_bargain($_POST);
     header('Location: ' . 'cabinet.php');
 }
+
+if (isset($_GET['bargain_target'])) {
+    $bargain_target = get_bargain_by_id($_GET["bargain_target"]);
+}
 ?>
 <head>
     <?php include("php/head_commons.php") ?>
@@ -41,7 +45,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         </div>
 
         <h2>Создание сделки</h2>
+        <?php
+        if (isset($bargain_target)) {
+            echo "<p class='w3-margin'>В качетве ответа на: "
+                . "<a href='bargain.php?id=$bargain_target->id'>$bargain_target->title</a></p>";
+        }
+        ?>
         <form id="create-form" action="" method="POST" class="w3-container" onsubmit="return create();">
+
+            <input type="number" value="<?php echo or_else($_GET, 'bargain_target', null) ?>" hidden>
 
             <div class="w3-margin-bottom">
                 <label class="w3-margin-right">
@@ -63,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             <div class="w3-margin" style="display: flex; justify-content: space-around; flex-wrap: wrap">
                 <label>
-                    <p class="w3-margin-bottom">Категория товара</p>
+                    <span class="w3-margin-bottom">Категория товара</span>
                     <select id="category" class="w3-input w3-border" style="width: 200pt" onchange="setItems()">
                         <option value="" disabled selected>-- Выберите категорию --</option>
                         <?php
@@ -76,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 </label>
 
                 <label>
-                    <p class="w3-margin-bottom">Товар</p>
+                    <span class="w3-margin-bottom">Товар</span>
                     <select id="item" class="w3-input w3-border" name="item_id" style="width: 200pt" disabled>
 
                     </select>
@@ -87,7 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             <textarea class="w3-input w3-border w3-margin-bottom" name="descr" id="descr"></textarea>
 
             <label class="w3-margin-bottom" style="display: block">
-                <input id="start-bet" type="number" name="start_bet" class="w3-border" style="width: 120pt" value="1000">
+                <input id="start-bet" type="number" name="start_bet" class="w3-border" style="width: 120pt"
+                       value="1000">
                 Начальная ставка
             </label>
 
@@ -102,10 +115,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             </label>
 
             <?php
-
-            ?>
-
-            <?php
             if (isset($label)) {
                 echo "<p class='w3-red w3-margin-bottom'>$label</p>";
             }
@@ -116,4 +125,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     </article>
 </div>
 <script src="js/create.js"></script>
+<?php
+if (isset($bargain_target)) {
+    ?>
+    <script>
+        category.value = <?php echo $bargain_target->category_id ?>;
+        setItems();
+        item.value = <?php echo $bargain_target->item_id ?>;
+    </script>
+    <?php
+}
+?>
 </body>
