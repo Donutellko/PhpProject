@@ -106,7 +106,7 @@
               <Height>280 px</Height>
             </Size>
             <DbOid>
-              <Path>exchange.bargain</Path>
+              <Path>exchange.offer</Path>
               <TypeName>Table</TypeName>
             </DbOid>
             <Compartments>
@@ -159,7 +159,7 @@
             </BendPoints>
             <IsManuallyRouted>false</IsManuallyRouted>
             <DbOid>
-              <Path>exchange.bargain.bargain_ibfk_2</Path>
+              <Path>exchange.offer.offer_ibfk_2</Path>
               <TypeName>ForeignKey</TypeName>
             </DbOid>
           </Model>
@@ -204,7 +204,7 @@
               <Height>195 px</Height>
             </Size>
             <DbOid>
-              <Path>exchange.bargain_bet</Path>
+              <Path>exchange.bargain</Path>
               <TypeName>Table</TypeName>
             </DbOid>
             <Compartments>
@@ -257,7 +257,7 @@
             </BendPoints>
             <IsManuallyRouted>false</IsManuallyRouted>
             <DbOid>
-              <Path>exchange.bargain_bet.bargain_bet_ibfk_2</Path>
+              <Path>exchange.bargain.bargain_ibfk_2</Path>
               <TypeName>ForeignKey</TypeName>
             </DbOid>
           </Model>
@@ -602,7 +602,7 @@
             </PortAnchors>
             <IsManuallyRouted>false</IsManuallyRouted>
             <DbOid>
-              <Path>exchange.bargain.bargain_ibfk_1</Path>
+              <Path>exchange.offer.offer_ibfk_1</Path>
               <TypeName>ForeignKey</TypeName>
             </DbOid>
           </Model>
@@ -671,7 +671,7 @@
             </PortAnchors>
             <IsManuallyRouted>false</IsManuallyRouted>
             <DbOid>
-              <Path>exchange.bargain_bet.bargain_bet_ibfk_1</Path>
+              <Path>exchange.bargain.bargain_ibfk_1</Path>
               <TypeName>ForeignKey</TypeName>
             </DbOid>
           </Model>
@@ -832,7 +832,7 @@
             </PortAnchors>
             <IsManuallyRouted>false</IsManuallyRouted>
             <DbOid>
-              <Path>exchange.bargain.bargain_ibfk_3</Path>
+              <Path>exchange.offer.offer_ibfk_3</Path>
               <TypeName>ForeignKey</TypeName>
             </DbOid>
           </Model>

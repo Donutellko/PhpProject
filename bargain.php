@@ -1,32 +1,37 @@
-<?php include("php/init.php") ?>
-
-<!--?php print_r($_SESSION) ?> -->
-
 <?php
+include("php/init.php");
 
 $bargain = get_bargain_by_id($_GET['id']);
-if (!isset($bargain->id)) {
-    http_response_code(404);
+if (empty($bargain)) {
     include('php/404.php');
-    exit;
+}
+$seller = get_offer_by_id($bargain->offer_seller_id);
+$buyer = get_offer_by_id($bargain->offer_buyer_id);
+
+$customer_id = or_else($_SESSION, 'customer_id');
+$customer_role = or_else($_SESSION, 'role');
+
+$customer_seller = get_customer_by_id($seller->customer_owner_id);
+$customer_buyer = get_customer_by_id($buyer->customer_owner_id);
+
+if ($customer_id != $seller->customer_owner_id
+    && $customer_id != $buyer->customer_owner_id
+    && $customer_role != 'ADMIN'
+    && $customer_role != 'ASSISTANT') {
+    include('php/404.php');
 }
 
-$customer_owner = get_customer_by_id($bargain->customer_owner_id);
-$assistant = get_assistant_by_id($bargain->assistant_id);
-$bets = get_bets_by_bargain_id($bargain->id);
-
-$user_is_owner = !empty($_SESSION['customer_id']) && $bargain->customer_owner_id == $_SESSION['customer_id'];
-$user_is_assistant = !empty($_SESSION['customer_id']) && $bargain->assistant_id == $_SESSION['customer_id'];
-
-if ($_POST) {
-
+if (!empty($_POST['message'])) {
+    add_bargain_messages($bargain, $_SESSION['customer_id'], $_POST['message']);
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="ru">
 
 <head>
     <?php include("php/head_commons.php") ?>
-    <title><?php echo $bargain->title ?> | <?php echo $APP_NAME ?></title>
+    <title>Сделка | <?php echo $APP_NAME ?></title>
 </head>
 
 <body>
@@ -35,92 +40,32 @@ if ($_POST) {
     <?php include("php/header.php") ?>
 
     <article>
+        <h2>Сделка</h2>
         <?php
-        if (!isset($bargain)) {
-            ?>
-            <div class="label">
-                <p>Сделка с таким идентификатором не найдена. </p>
-                <p>Вероятно, она была удалена или никогда не существовала.</p>
-            </div>
-            <?php
-        } else {
-            ?>
-            <h2> <?php echo $bargain->title; ?> </h2>
-            <?php if ($bargain->is_closed) echo '<h3 class="w3-red">Сделка закрыта.</h3>' ?>
-            <div class="descr w3-margin-bottom"> <?php echo $bargain->descr; ?> </div>
-            <div class="addinfo">
-                <h3> Информация о сделке: </h3>
-                <p>Размещено: <?php echo $bargain->created; ?></p>
-                <p>Начальная ставка: <?php echo $bargain->start_bet; ?>руб. </p>
-                <p>Текущая
-                    ставка: <?php echo(empty($bets) ? 'Отсутствует' : '<b>' . $bets[0]->amount . 'руб. </b>'); ?> </p>
-                <p>Ставка брокера: <?php echo $assistant->rate - 0; ?>%</p>
-            </div>
-            <?php
+        echo "<p>Продавец: $customer_seller->fullname (email: $customer_seller->email) "
+            . "<a class='w3-btn w3-border' href='offer.php?id=$seller->id'>Предложение продавца</a></p>";
+        echo "<p>Покупатель: $customer_buyer->fullname (email: $customer_buyer->email) "
+            . "<a class='w3-btn w3-border' href='offer.php?id=$buyer->id'>Предложение покупателя</a> </p>";
+        $assistant_info = empty($assistant) ? "ещё не найден" : "$assistant->fullname (email: $customer_buyer->email)";
+        echo "<p>Брокер: $assistant_info</p>";
 
-            if ($user_is_owner || isset($_SESSION['role']) && $_SESSION['role'] == 'ADMIN') {
-                ?>
-                <h3>Управление сделкой:</h3>
-                <form method="post">
-                    <label class="w3-margin-top">
-                        <input type="checkbox" name="is_closed" value="<?php echo $bargain->is_closed ?>">
-                        Закрыть сделку
-                    </label>
-                    <br>
-                    <button class="w3-btn w3-border w3-margin-top">Применить</button>
-                </form>
-                <?php
-            } else if (isset($_SESSION['role'])) {
-                ?>
-                <a href='create.php?bargain_target=<?php echo $bargain->id ?>' class='w3-btn w3-green w3-margin-top'>
-                    Создать ответное предложение
-                </a>
-                <?php
-            } else {
-                ?>
-                <p class='w3-margin-top'>
-                    <b><a href="login.php?redirect=<?php echo urlencode($_SERVER['REQUEST_URI']) ?>">Авторизуйтесь</a>, чтобы создать ответное предложение.</b>
-                </p>
-                <?php
-            }
+        echo "<h2>Чат:</h2>";
 
-            if ($user_is_owner || $user_is_assistant || (or_else($_SESSION, 'role') == 'ADMIN')) {
-                ?>
-                <h3>Ставки:</h3>
-                <p class="w3-margin-bottom">Информация обо всех совершённых ставках видна только создателю сделки, её
-                    брокеру и модераторам.
-                    Остальные пользователи видят только последнюю, лидирующую, ставку.</p>
-                <?php
-                if (count($bets)) {
-                    foreach ($bets as $bet) {
-                        ?>
-                        <div class="bet">
-                            <?php
-                            echo "<a class='w3-btn w3-green' href='bargain.php?id=$bargain->id&complete=$bet->id'>Заключить сделку </a>";
-                            echo $bet->created . ': ';
-                            echo '<b>' . $bet->amount . 'руб. </b>';
-                            echo(empty($bet->comment) ? 'Сообщение отсутствует.' : 'Сообщение: ' . $bet->comment);
-                            ?>
-                        </div>
-                        <?php
-                    }
-                } else {
-                    ?>
-                    <div class="label">Ставок нет.</div>
-                    <?php
-                }
-            } else if (!empty($_SESSION['id'])) {
-                ?>
-                <a href="bet.php?id=<?php echo $bargain->id ?>"></a>
-                <?php
-            }
+        $messages = get_bargain_messages($bargain);
+        foreach($messages as $message) {
+            echo "<p><b>$message->fullname</b>: "
+                . "<span>$message->text</span></p>";
         }
         ?>
+        <form method="post">
+            <input class="w3-border w3-padding" name="message">
+            <button class="w3-btn w3-green" type="submit">Отправить</button>
+            <button class="w3-btn w3-border" onclick="location.href = location.href">Обновить</button>
+        </form>
+        <?php
+
+        ?>
     </article>
-
-    <?php include("php/footer.php") ?>
-
 </div>
 </body>
-
 </html>

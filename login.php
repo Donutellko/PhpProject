@@ -1,6 +1,6 @@
-<?php include("php/init.php") ?>
-
 <?php
+
+include("php/init.php");
 
 if (isset($_SESSION['email']) && empty($_SESSION['confirm_code'])) {
     $redirect = isset($_GET['redirect']) ? urldecode($_GET['redirect']) : 'cabinet.php';
@@ -39,6 +39,9 @@ if ($is_login) {
 }
 
 ?>
+
+<!DOCTYPE html>
+<html lang="ru">
 
 <head>
     <?php include("php/head_commons.php") ?>

@@ -2,6 +2,9 @@
 
 <!--?php print_r($_SESSION) ?> -->
 
+<!DOCTYPE html>
+<html lang="ru">
+
 <head>
     <?php include("php/head_commons.php") ?>
     <title>Главная страница | <?php echo $APP_NAME ?></title>
@@ -13,8 +16,8 @@
         <?php include("php/header.php") ?>
 
         <article>
-            <?php $bargains = get_bargains() ?>
-            <?php include("php/bargains_list.php") ?>
+            <?php $offers = get_offers() ?>
+            <?php include("php/offers_list.php") ?>
         </article>
 
 

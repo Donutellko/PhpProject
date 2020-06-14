@@ -4,7 +4,7 @@ const title = document.getElementById('title');
 const descr = document.getElementById('descr');
 const category = document.getElementById('category');
 const item = document.getElementById('item');
-const start_bet = document.getElementById('start-bet');
+const price = document.getElementById('start-bet');
 const time_end = document.getElementById('time-end');
 const future = document.getElementById('future');
 
@@ -50,7 +50,8 @@ function create() {
     for (let input of inputs) {
         if (!input.value) {
             input.classList.add("w3-border-red");
-            error = true;
+            console.log(input);
+            if (input.name !== 'offer_target') error = true;
         } else {
             input.classList.remove("w3-border-red");
             input.classList.add("w3-border");

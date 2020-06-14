@@ -8,7 +8,7 @@
 ## index.php
 
 * php/header_login.php
-* php/bargains_hot.php
+* php/offers_hot.php
 
 # Snippets (php/)
 
@@ -17,9 +17,9 @@
 * Logo
 * Log in button, if not logged in, or link to cabinet.php otherwise
 
-## bargains_hot
+## offers_hot
 
-List of new bargains
+List of new offers
 
 ## connect
 

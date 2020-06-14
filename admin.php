@@ -4,21 +4,24 @@ include 'php/init.php';
 
 $is_users = isset($_GET['users']);
 $is_user = isset($_GET['user']);
-$is_bargains = isset($_GET['bargains']);
-$is_bargain = isset($_GET['bargain']);
+$is_offers = isset($_GET['offers']);
+$is_offer = isset($_GET['offer']);
 $is_categories = isset($_GET['categories']);
 $is_items = isset($_GET['items']);
 
 if ($is_user && isset($_POST['id'])) {
     update_customer($_POST);
-} else if ($is_bargain && isset($_POST['id'])) {
-    update_bargain($_POST);
+} else if ($is_offer && isset($_POST['id'])) {
+    update_offer($_POST);
 } else if ($is_categories && isset($_POST['id'])) {
     update_category($_POST);
 } else if ($is_items && isset($_POST['id'])) {
     update_item($_POST);
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="ru">
 
 <head>
     <?php include("php/head_commons.php") ?>
@@ -33,7 +36,7 @@ if ($is_user && isset($_POST['id'])) {
     <article>
         <div>
             <a href="?users" class="w3-btn w3-border <?php echo $is_users || $is_user ? 'w3-grey' : '' ?>">Пользователи</a>
-            <a href="?bargains" class="w3-btn w3-border <?php echo $is_bargains || $is_bargain ? 'w3-grey' : '' ?>">Сделки</a>
+            <a href="?offers" class="w3-btn w3-border <?php echo $is_offers || $is_offer ? 'w3-grey' : '' ?>">Сделки</a>
             <a href="?categories" class="w3-btn w3-border <?php echo $is_categories || $is_items ? 'w3-grey' : '' ?>">Категории и товары</a>
         </div>
 
@@ -68,26 +71,34 @@ if ($is_user && isset($_POST['id'])) {
                 }
                 echo '<button type="submit">Сохранить</button></form>';
 
-            } else if ($is_bargains) {
+            } else if ($is_offers) {
                 echo "<h1>Список сделок</h1>";
-                $bargains = get_bargains();
+                $offers = get_offers();
 
-                foreach ($bargains as $bargain) {
+                foreach ($offers as $offer) {
                     ?>
-                    <a href="?bargain=<?php echo $bargain->id ?>" style="text-decoration: none">
+                    <a href="?offer=<?php echo $offer->id ?>" style="text-decoration: none">
                         <div class='w3-card-4 w3-padding w3-margin-top'>
-                            <h4 class=''><?php echo ($bargain->is_sell ? "[Продажа] " : "[Покупка] ") . $bargain->title ?></h4>
-                            <p class=''><?php echo '<b>владелец: ' . $bargain->owner_fullname . '</b>' ?></p>
-                            <p class=''><?php echo $bargain->descr ?></p>
+                            <h4 class=''><?php echo ($offer->is_sell ? "[Продать] " : "[Купить] ") . $offer->title ?></h4>
+                            <p class=''><?php echo '<b>владелец: ' . $offer->owner_fullname . '</b>' ?></p>
+                            <p class=''><?php echo $offer->descr ?></p>
                         </div>
                     </a>
                     <?php
                 }
-            } else if ($is_bargain) {
+
+                echo "<h2>Сделки, ожидающие рассмотрения</h2>";
+                $bargains = get_bargains_no_assistant();
+                foreach ($bargains as $bargain) {
+                    echo "<div class='bet w3-card-4 w3-margin-top'>";
+                    echo "<a class='w3-button w3-green' href='bargain.php?id=$bargain->id'>Сделка в прогрессе</a> ";
+                    echo "</div>";
+                }
+            } else if ($is_offer) {
                 echo '<form method="post">';
-                $bargain = get_bargain_only_by_id($_GET['bargain']);
-                echo '<h2>' . ($bargain->is_sell ? "[Продажа] " : "[Покупка] ") . $bargain->title . '</h2>';
-                foreach (((array)$bargain) as $field => $value) {
+                $offer = get_offer_only_by_id($_GET['offer']);
+                echo '<h2>' . ($offer->is_sell ? "[Продать] " : "[Купить] ") . $offer->title . '</h2>';
+                foreach (((array)$offer) as $field => $value) {
                     echo '<label style="display: inline-block; min-width: 150pt">' . $field . ' :  </label>';
                     echo '<input name="' . $field . '" value="' . $value . '"><br>';
                 }

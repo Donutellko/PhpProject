@@ -12,8 +12,3 @@ if (!empty($_SESSION['confirm_code']) && strpos($_SERVER['REQUEST_URI'], 'login'
     header('Location: login.php');
     exit();
 }
-
-?>
-
-<!DOCTYPE html>
-<html lang="ru">

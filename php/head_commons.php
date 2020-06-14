@@ -10,5 +10,5 @@
 <link rel="stylesheet" href="css/main.css" type="text/css" media="all" />
 <link rel="stylesheet" href="css/header.css" type="text/css" media="all" />
 <link rel="stylesheet" href="css/footer.css" type="text/css" media="all" />
-<link rel="stylesheet" href="css/bargains.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/offers.css" type="text/css" media="all" />
 <link rel="stylesheet" href="css/form.css" type="text/css" media="all" />

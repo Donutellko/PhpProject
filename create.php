@@ -1,6 +1,6 @@
-<?php include("php/init.php") ?>
-
 <?php
+include("php/init.php");
+
 if (empty($_SESSION['customer_id'])) {
     header('Location: ' . 'index.php');
     exit;
@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     //
 } elseif (empty($_POST['title'])
     || empty($_POST['descr'])
-    || empty($_POST['start_bet'])
+    || empty($_POST['price'])
     || empty($_POST['item_id'])
     || empty($_POST['time_end'])
     || empty($_POST['future'])
@@ -19,15 +19,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $label = "Заполните все поля!";
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_POST['customer_owner_id'] = $_SESSION['customer_id'];
-    $_POST['assistant_id'] = get_random_assistant()->id;
-    create_bargain($_POST);
+    create_offer($_POST);
     header('Location: ' . 'cabinet.php');
 }
 
-if (isset($_GET['bargain_target'])) {
-    $bargain_target = get_bargain_by_id($_GET["bargain_target"]);
+if (isset($_GET['offer_target'])) {
+    $offer_target = get_offer_by_id($_GET["offer_target"]);
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="ru">
+
 <head>
     <?php include("php/head_commons.php") ?>
     <title>Создание сделки | Кабинет пользователя | <?php echo $APP_NAME ?></title>
@@ -46,14 +49,14 @@ if (isset($_GET['bargain_target'])) {
 
         <h2>Создание сделки</h2>
         <?php
-        if (isset($bargain_target)) {
+        if (isset($offer_target)) {
             echo "<p class='w3-margin'>В качетве ответа на: "
-                . "<a href='bargain.php?id=$bargain_target->id'>$bargain_target->title</a></p>";
+                . "<a href='offer.php?id=$offer_target->id'>$offer_target->title</a></p>";
         }
         ?>
         <form id="create-form" action="" method="POST" class="w3-container" onsubmit="return create();">
 
-            <input type="number" value="<?php echo or_else($_GET, 'bargain_target', null) ?>" hidden>
+            <input type="number" name="offer_target" value="<?php echo or_else($_GET, 'offer_target', null) ?>" hidden>
 
             <div class="w3-margin-bottom">
                 <label class="w3-margin-right">
@@ -99,7 +102,7 @@ if (isset($_GET['bargain_target'])) {
             <textarea class="w3-input w3-border w3-margin-bottom" name="descr" id="descr"></textarea>
 
             <label class="w3-margin-bottom" style="display: block">
-                <input id="start-bet" type="number" name="start_bet" class="w3-border" style="width: 120pt"
+                <input id="start-bet" type="number" name="price" class="w3-border" style="width: 120pt"
                        value="1000">
                 Начальная ставка
             </label>
@@ -126,12 +129,12 @@ if (isset($_GET['bargain_target'])) {
 </div>
 <script src="js/create.js"></script>
 <?php
-if (isset($bargain_target)) {
+if (isset($offer_target)) {
     ?>
     <script>
-        category.value = <?php echo $bargain_target->category_id ?>;
+        category.value = <?php echo $offer_target->category_id ?>;
         setItems();
-        item.value = <?php echo $bargain_target->item_id ?>;
+        item.value = <?php echo $offer_target->item_id ?>;
     </script>
     <?php
 }

@@ -1,4 +1,4 @@
-.bargains-list {
+.offers-list {
     display: flex;
     flex-grow: 1;
     flex-wrap: wrap;
@@ -7,7 +7,7 @@
     padding: 20pt;
 }
 
-.bargain {
+.offer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -16,10 +16,10 @@
     text-decoration: none;
 }
 
-.bargain>h4 {
+.offer>h4 {
     margin: 10pt;
 }
 
-.bargain>p {
+.offer>p {
     margin: 0 10pt 5pt;
 }

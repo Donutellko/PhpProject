@@ -6,7 +6,9 @@ if (empty($_SESSION['customer_id'])) {
     exit;
 }
 ?>
-<html>
+
+<!DOCTYPE html>
+<html lang="ru">
 <head>
     <?php include("php/head_commons.php") ?>
     <title>Кабинет пользователя | <?php echo $APP_NAME ?></title>

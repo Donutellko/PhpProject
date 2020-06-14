@@ -1,9 +1,15 @@
 <?php
 
 $host = 'localhost';        // адрес сервера 
+
+$database = 'id13661830_kitclicker';    // имя базы данных
+$user = 'id13661830_root';              // имя пользователя
+$password = 'z-}[&@tXiz9x]Fn6';                 // пароль
+
 $database = 'exchange';     // имя базы данных
 $user = 'exchange';         // имя пользователя
 $password = 'exchange';     // пароль
+
 $charset = 'utf8mb4';       // кодировка
 
 
