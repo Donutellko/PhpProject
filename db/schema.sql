@@ -248,11 +248,11 @@ create function login(_email varchar(255), _password varchar(255))
 begin
     declare _id int;
     set _id = -1;
-    select customer.id
+    select id
     into _id
-    from exchange.customer customer
-    where customer.email = _email
-      and customer.password_hash = sha1(_password);
+    from customer
+    where email = _email
+      and password_hash = sha1(_password);
 
     return _id;
 end
@@ -269,9 +269,10 @@ create function register(_email varchar(255), _password varchar(255), _fullname 
 begin
     declare _id int;
     set _id = -1;
-    select max(customer.id) + 1
+
+    select max(id) + 1
         into _id
-        from exchange.customer customer;
+        from customer;
 
     insert into customer (id, fullname, email, balance, password_hash, blocked)
                 values (_id, _fullname, _email, 0, sha1(_password), false);

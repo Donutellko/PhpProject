@@ -238,3 +238,27 @@ function update_item($data) {
         $stmt->execute($data);
     }
 }
+
+function get_stat_sell() {
+    global $pdo;
+    $stmt = $pdo->query("select date(created) as date, count(*) as cnt from offer where is_sell = true group by date(created)");
+    return $stmt->fetchAll();
+}
+
+function get_stat_buy() {
+    global $pdo;
+    $stmt = $pdo->query("select date(created) as date, count(*) as cnt from offer where is_sell = false group by date(created)");
+    return $stmt->fetchAll();
+}
+
+function get_stat_bargain() {
+    global $pdo;
+    $stmt = $pdo->query("select date(created) as date, count(*) as cnt from bargain group by date(created)");
+    return $stmt->fetchAll();
+}
+
+function get_stat_completed() {
+    global $pdo;
+    $stmt = $pdo->query("select date(exec_end) as date, count(*) as cnt from bargain_completed group by date(exec_end)");
+    return $stmt->fetchAll();
+}

@@ -8,6 +8,7 @@ $is_offers = isset($_GET['offers']);
 $is_offer = isset($_GET['offer']);
 $is_categories = isset($_GET['categories']);
 $is_items = isset($_GET['items']);
+$is_stats = isset($_GET['stats']);
 
 if ($is_user && isset($_POST['id'])) {
     update_customer($_POST);
@@ -35,9 +36,12 @@ if ($is_user && isset($_POST['id'])) {
 
     <article>
         <div>
-            <a href="?users" class="w3-btn w3-border <?php echo $is_users || $is_user ? 'w3-grey' : '' ?>">Пользователи</a>
+            <a href="?users"
+               class="w3-btn w3-border <?php echo $is_users || $is_user ? 'w3-grey' : '' ?>">Пользователи</a>
             <a href="?offers" class="w3-btn w3-border <?php echo $is_offers || $is_offer ? 'w3-grey' : '' ?>">Сделки</a>
-            <a href="?categories" class="w3-btn w3-border <?php echo $is_categories || $is_items ? 'w3-grey' : '' ?>">Категории и товары</a>
+            <a href="?categories" class="w3-btn w3-border <?php echo $is_categories || $is_items ? 'w3-grey' : '' ?>">Категории
+                и товары</a>
+            <a href="?stats" class="w3-btn w3-border <?php echo $is_stats ? 'w3-grey' : '' ?>">Графички</a>
         </div>
 
         <div>
@@ -135,6 +139,10 @@ if ($is_user && isset($_POST['id'])) {
                     echo '<button type="submit">Сохранить</button></form>';
                 }
                 echo "<p class='w3-margin-top'>Чтобы удалить товар, очистите название и нажмите Сохранить</p>";
+            } else if ($is_stats) {
+
+                echo "<div id='chart1' style='height: 300pt'></div>";
+                echo "<script src='https://cdn.anychart.com/js/latest/anychart-bundle.min.js'></script>";
             }
             ?>
         </div>
@@ -142,4 +150,49 @@ if ($is_user && isset($_POST['id'])) {
 
     <?php include("php/footer.php") ?>
 </div>
+<?php
+if ($is_stats) {
+//    echo "<script src='js/stats.js'></script>"
+    ?>
+    <script>
+        anychart.onDocumentLoad(function () {
+            var chart = anychart.column()
+            chart.data({
+                header: ["#", "Покупка", "Продажа", "Начатых сделок", "Совершённых сделок"],
+                rows: <?php
+                    $stat_sell = get_stat_sell();
+                    $stat_buy = get_stat_buy();
+                    $stat_bargain = get_stat_bargain();
+                    $stat_completed = get_stat_completed();
+
+                    $stats = array();
+                    foreach ($stat_sell as $stat) $stats[$stat->date] = array($stat->date, 0, 0, 0, 0);
+                    foreach ($stat_buy as $stat) $stats[$stat->date] = array($stat->date, 0, 0, 0, 0);
+                    foreach ($stat_bargain as $stat) $stats[$stat->date] = array($stat->date, 0, 0, 0, 0);
+                    foreach ($stat_completed as $stat) $stats[$stat->date] = array($stat->date, 0, 0, 0, 0);
+
+                    ksort($stats);
+
+                    foreach ($stat_sell as $stat) $stats[$stat->date][1] = $stat->cnt;
+                    foreach ($stat_buy as $stat) $stats[$stat->date][2] = $stat->cnt;
+                    foreach ($stat_bargain as $stat) $stats[$stat->date][3] = $stat->cnt;
+                    foreach ($stat_completed as $stat) $stats[$stat->date][4] = $stat->cnt;
+
+                    $result = array();
+                    foreach ($stats as $stat) {
+                        array_push($result, $stat);
+                    }
+
+                    echo json_encode($result);
+                ?>
+            });
+            chart.title("График количества объявлений по дням");
+            chart.legend(true);
+            chart.container("chart1").draw();
+        });
+    </script>
+    <?php
+}
+?>
 </body>
+</html>

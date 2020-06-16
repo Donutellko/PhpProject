@@ -18,5 +18,5 @@ function set_session($customer) {
 }
 
 function reset_session() {
-    set_session(new stdClass());
+    $_SESSION = [];
 }

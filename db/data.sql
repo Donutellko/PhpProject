@@ -3,7 +3,9 @@
 /* =============================================== */
 /* FULL CLEAR */
 /* =============================================== */
+SET FOREIGN_KEY_CHECKS=0;
 
+delete from bargain_message where 1 = 1;
 delete from bargain where 1 = 1;
 delete from offer where 1 = 1;
 
@@ -12,6 +14,8 @@ delete from customer where 1 = 1;
 
 delete from item where 1 = 1;
 delete from category where 1 = 1;
+
+SET FOREIGN_KEY_CHECKS=1;
 
 
 
@@ -53,10 +57,15 @@ values    /* 25: +++++++++++++++++++++++++ 70: +++++++++++++++++++++++++++++++++
 
 insert into offer (id, item_id, customer_owner_id, future, created, time_end, is_sell, is_closed, price, title, descr)
 values
-(1, 10010, 5, NULL, current_timestamp, current_timestamp, true, FALSE, 100, 'Продам картошку.', 'Продам свежую картошку.'),
+(1, 10010, 5, NULL, current_timestamp - 10, current_timestamp, true, FALSE, 100, 'Продам картошку.', 'Продам свежую картошку.'),
 (2, 10010, 6, NULL, current_timestamp, current_timestamp, false, FALSE, 100, 'Куплю картошку.', 'Куплю свежую картошку.'),
 (3, 20010, 5, NULL, current_timestamp, current_timestamp, true, false, 1000, 'Арматура в количестве 100000 штук', 'Завалялась арматура после оборудования дачного участка туалетом. Самовывоз из деревни Гадюкино.'),
-(4, 10030, 6, NULL, current_timestamp, current_timestamp, false, false, 1000, 'Хочу баклажан', 'Ребятки, выручайте, нужно 800кг баклажанов для совершения постироничной фотосессии.')
+(4, 10030, 6, NULL, current_timestamp, current_timestamp + 100, false, false, 1000, 'Хочу баклажан', 'Ребятки, выручайте, нужно 800кг баклажанов для совершения постироничной фотосессии.'),
+(5, 10010, 5, NULL, current_timestamp - INTERVAL 1 DAY, current_timestamp, true, FALSE, 100, 'Продам картошку.', 'Продам свежую картошку.'),
+(6, 10010, 5, NULL, current_timestamp - INTERVAL 1 DAY, current_timestamp, true, FALSE, 100, 'Продам картошку.', 'Продам свежую картошку.'),
+(7, 10010, 5, NULL, current_timestamp - INTERVAL 2 DAY, current_timestamp, true, FALSE, 100, 'Продам картошку.', 'Продам свежую картошку.'),
+(8, 10010, 5, NULL, current_timestamp - INTERVAL 2 DAY, current_timestamp, false, FALSE, 100, 'Продам картошку.', 'Продам свежую картошку.'),
+(9, 10010, 5, NULL, current_timestamp - INTERVAL 2 DAY, current_timestamp, true, FALSE, 100, 'Продам картошку.', 'Продам свежую картошку.')
 ;
 
 insert into bargain (created, offer_seller_id, offer_buyer_id, assistant_id)
